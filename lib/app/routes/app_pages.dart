@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/mainmenu/bindings/mainmenu_binding.dart';
+import '../modules/mainmenu/views/mainmenu_view.dart';
 
 part 'app_routes.dart';
 
@@ -13,8 +15,13 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => HomeView(),
+      page: () => const HomeView(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.MAINMENU,
+      page: () => const MainmenuView(),
+      binding: MainmenuBinding(),
     ),
   ];
 }

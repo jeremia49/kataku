@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  HomeView({Key? key}) : super(key: key);
+  const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,13 +17,6 @@ class HomeView extends GetView<HomeController> {
             Positioned(
               left: MediaQuery.of(context).size.width * 0.5,
               child: ElevatedButton(
-                child: Text(
-                  "Play Now",
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.normal),
-                ),
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all<Size>(Size(50, 50)),
                   foregroundColor:
@@ -34,19 +27,28 @@ class HomeView extends GetView<HomeController> {
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
-                      side: BorderSide(
+                      side: const BorderSide(
                         color: Color.fromARGB(255, 139, 87, 42),
                       ),
                     ),
                   ),
                 ),
-                onPressed: () => null,
+                onPressed: () {
+                  Get.toNamed('/mainmenu');
+                },
+                child: const Text(
+                  "Play Now",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.normal),
+                ),
               ),
             ),
           ],
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: Color.fromARGB(255, 248, 219, 13),
     );
   }
 }
