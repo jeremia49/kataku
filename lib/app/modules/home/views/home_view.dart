@@ -18,11 +18,12 @@ class HomeView extends GetView<HomeController> {
               left: MediaQuery.of(context).size.width * 0.5,
               child: ElevatedButton(
                 style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all<Size>(Size(50, 50)),
+                  minimumSize:
+                      MaterialStateProperty.all<Size>(const Size(50, 50)),
                   foregroundColor:
                       MaterialStateProperty.all<Color>(Colors.white),
                   backgroundColor: MaterialStateProperty.all<Color>(
-                    Color.fromARGB(255, 139, 87, 42),
+                    const Color.fromARGB(255, 139, 87, 42),
                   ),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
@@ -48,7 +49,7 @@ class HomeView extends GetView<HomeController> {
           ],
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 248, 219, 13),
+      backgroundColor: const Color.fromARGB(255, 248, 219, 13),
     );
   }
 }
