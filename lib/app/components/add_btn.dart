@@ -33,7 +33,6 @@ class _AddBTNImageState extends State<AddBTNImage> {
     widget.prefs ??= await SharedPreferences.getInstance();
     final Directory appDocumentsDir = await getApplicationDocumentsDirectory();
     final filename = widget.prefs!.getString(widget.itemName) ?? "";
-    print("FIlename didapat : " + filename);
     if (filename == "") return;
 
     final imageTarget = File(filename);
@@ -76,7 +75,6 @@ class _AddBTNImageState extends State<AddBTNImage> {
         widget.targetImage = File(imageTarget.path);
       });
     } catch (e) {
-      print(e);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Gagal menyimpan file'),
@@ -107,7 +105,7 @@ class _AddBTNImageState extends State<AddBTNImage> {
                     children: <Widget>[
                       ListTile(
                         leading: Icon(Icons.photo),
-                        title: Text("Pick an image"),
+                        title: Text("Pilih dari Galeri"),
                         onTap: () async {
                           if (!context.mounted) return;
                           await pickImage(context, ImageSource.gallery);
@@ -116,7 +114,7 @@ class _AddBTNImageState extends State<AddBTNImage> {
                       ),
                       ListTile(
                           leading: Icon(Icons.camera),
-                          title: Text("Capture a photo"),
+                          title: Text("Ambil dengan Kamera"),
                           onTap: () async {
                             await pickImage(context, ImageSource.camera);
                             Navigator.of(context).pop();
