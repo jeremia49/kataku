@@ -15,66 +15,64 @@ class ShowItemImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Stack(
-          alignment: AlignmentDirectional.center,
-          children: [
-            Image.asset("assets/images/bg_base.jpg"),
-            SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.only(
-                  top: 50,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    () {
-                      if (isFromAsset) {
-                        return Image.asset(
-                          gambarItem,
-                          width: MediaQuery.of(context).size.width * 0.7,
-                        );
-                      }
-                      return Image.file(
-                        File(gambarItem),
+      body: Stack(
+        alignment: AlignmentDirectional.center,
+        children: [
+          Image.asset("assets/images/bg_base.jpg"),
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: 50,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  () {
+                    if (isFromAsset) {
+                      return Image.asset(
+                        gambarItem,
                         width: MediaQuery.of(context).size.width * 0.7,
                       );
-                    }(),
-                    SizedBox(
-                      height: 40,
+                    }
+                    return Image.file(
+                      File(gambarItem),
+                      width: MediaQuery.of(context).size.width * 0.7,
+                    );
+                  }(),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Text(
+                    namaItem,
+                    style: TextStyle(
+                      fontSize: 50,
                     ),
-                    Text(
-                      namaItem,
-                      style: TextStyle(
-                        fontSize: 50,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    () {
-                      if (audioSrcItem != "") return AudioPlayer(audioSrcItem);
-                      return const SizedBox(
-                        height: 1,
-                      );
-                    }(),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  () {
+                    if (audioSrcItem != "") return AudioPlayer(audioSrcItem);
+                    return const SizedBox(
+                      height: 1,
+                    );
+                  }(),
+                ],
               ),
             ),
-            Positioned(
-              left: 10,
-              top: 10,
-              child: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: Image.asset("assets/images/home_btn.png"),
-                iconSize: 50,
-              ),
+          ),
+          Positioned(
+            left: 10,
+            top: 10,
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: Image.asset("assets/images/home_btn.png"),
+              iconSize: 50,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       backgroundColor: Color.fromARGB(255, 255, 246, 129),
     );
