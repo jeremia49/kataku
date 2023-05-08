@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'app/routes/app_pages.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   runApp(
     GetMaterialApp(
       title: "Application",
@@ -13,5 +15,4 @@ void main() {
       getPages: AppPages.routes,
     ),
   );
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 }

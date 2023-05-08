@@ -1,11 +1,17 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
+import '../../../components/add_btn.dart';
 import '../controllers/mainmenu_controller.dart';
 
 class MainmenuView extends GetView<MainmenuController> {
-  const MainmenuView({Key? key}) : super(key: key);
+  MainmenuView({Key? key}) : super(key: key);
+  final ImagePicker _picker = ImagePicker();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,28 +27,7 @@ class MainmenuView extends GetView<MainmenuController> {
                   SizedBox(
                     height: 40,
                   ),
-                  Material(
-                    type: MaterialType.transparency,
-                    child: Ink(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Color.fromARGB(255, 225, 219, 137),
-                          width: 4.0,
-                        ),
-                        shape: BoxShape.rectangle,
-                      ),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Padding(
-                          padding: EdgeInsets.all(20.0),
-                          child: Image.asset(
-                            "assets/images/add_btn.png",
-                            width: MediaQuery.of(context).size.width * 0.25,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  AddBTNImage("myimage"),
                   SizedBox(
                     height: 20,
                   ),
@@ -50,7 +35,7 @@ class MainmenuView extends GetView<MainmenuController> {
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: TextField(
                       decoration: InputDecoration(
-                        fillColor: Color.fromARGB(255, 145, 140, 140),
+                        fillColor: Color.fromARGB(50, 145, 140, 140),
                         filled: true,
                         border: OutlineInputBorder(),
                         hintText: 'Nama',

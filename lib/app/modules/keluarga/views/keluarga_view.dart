@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:kataku/app/components/add_btn.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../controllers/keluarga_controller.dart';
 
@@ -29,32 +34,29 @@ class KeluargaView extends GetView<KeluargaController> {
                     height: 20,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      InkWell(
-                        onTap: () {
-                          Get.toNamed('/keluarga');
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.all(20.0),
-                          child: Image.asset(
-                            "assets/images/add_btn.png",
-                            width: MediaQuery.of(context).size.width * 0.25,
-                          ),
-                        ),
+                      Padding(
+                        padding: EdgeInsets.all(8),
+                        child: AddBTNImage("ayah"),
                       ),
-                      TextField(
-                        decoration: InputDecoration(
-                          fillColor: Color.fromARGB(255, 145, 140, 140),
-                          filled: true,
-                          border: OutlineInputBorder(),
-                          hintText: 'Nama',
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              fillColor: Color.fromARGB(50, 145, 140, 140),
+                              filled: true,
+                              border: OutlineInputBorder(),
+                              hintText: 'Nama',
+                            ),
+                          ),
                         ),
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 5,
                   ),
                 ],
               ),
