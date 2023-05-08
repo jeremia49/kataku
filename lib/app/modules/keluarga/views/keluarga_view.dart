@@ -34,24 +34,39 @@ class KeluargaView extends GetView<KeluargaController> {
                   SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(8),
-                        child: AddBTNImage("ayah"),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          child: RememberTextField("Nama"),
-                        ),
-                      ),
-                    ],
-                  ),
+                  KeluargaMember("Ayah"),
                   SizedBox(
                     height: 5,
                   ),
+                  KeluargaMember("Ibu"),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  KeluargaMember("Kakek"),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  KeluargaMember("Nenek"),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  KeluargaMember("Paman"),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  KeluargaMember("Bibi"),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  KeluargaMember("Tante"),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  KeluargaMember("Saudara Laki Laki"),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  KeluargaMember("Saudara Perempuan"),
                 ],
               ),
             ),
@@ -70,6 +85,30 @@ class KeluargaView extends GetView<KeluargaController> {
         ),
       ),
       backgroundColor: Color.fromARGB(255, 255, 246, 129),
+    );
+  }
+}
+
+class KeluargaMember extends StatelessWidget {
+  final String nama;
+  const KeluargaMember(this.nama, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Padding(
+          padding: EdgeInsets.all(8),
+          child: AddBTNImage(nama.toLowerCase()),
+        ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            child: RememberTextField(nama),
+          ),
+        ),
+      ],
     );
   }
 }

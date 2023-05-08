@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kataku/app/components/remember_input.dart';
 
 import '../../../components/add_btn.dart';
 import '../controllers/mainmenu_controller.dart';
@@ -33,14 +34,7 @@ class MainmenuView extends GetView<MainmenuController> {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.5,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        fillColor: Color.fromARGB(50, 145, 140, 140),
-                        filled: true,
-                        border: OutlineInputBorder(),
-                        hintText: 'Nama',
-                      ),
-                    ),
+                    child: RememberTextField("Nama"),
                   ),
                   SizedBox(
                     height: 20,
