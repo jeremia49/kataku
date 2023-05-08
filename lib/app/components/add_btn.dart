@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,7 +30,6 @@ class AddBTNImage extends StatefulWidget {
 class _AddBTNImageState extends State<AddBTNImage> {
   Future<void> checkImage() async {
     widget.prefs ??= await SharedPreferences.getInstance();
-    final Directory appDocumentsDir = await getApplicationDocumentsDirectory();
     final filename = widget.prefs!.getString(widget.itemName) ?? "";
     if (filename == "") return;
 

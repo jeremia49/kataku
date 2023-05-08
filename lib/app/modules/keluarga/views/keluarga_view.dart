@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kataku/app/components/add_btn.dart';
+import 'package:kataku/app/components/remember_input.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../controllers/keluarga_controller.dart';
@@ -43,14 +44,7 @@ class KeluargaView extends GetView<KeluargaController> {
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.only(left: 10, right: 10),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              fillColor: Color.fromARGB(50, 145, 140, 140),
-                              filled: true,
-                              border: OutlineInputBorder(),
-                              hintText: 'Nama',
-                            ),
-                          ),
+                          child: RememberTextField("Nama"),
                         ),
                       ),
                     ],
