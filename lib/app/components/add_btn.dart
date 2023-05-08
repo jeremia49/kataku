@@ -8,17 +8,11 @@ import 'package:uuid/uuid.dart';
 import 'package:path/path.dart' as p;
 
 class AddBTNImage extends StatefulWidget {
-  File? targetImage;
   final String itemName;
-  final String defaultImage = "assets/images/add_btn.png";
-  final ImagePicker _picker = ImagePicker();
-  String? name;
-  SharedPreferences? prefs;
 
   AddBTNImage(
     this.itemName, {
     super.key,
-    this.prefs,
   });
 
   @override
@@ -28,19 +22,23 @@ class AddBTNImage extends StatefulWidget {
 }
 
 class _AddBTNImageState extends State<AddBTNImage> {
+  File? targetImage;
+  SharedPreferences? prefs;
+  final ImagePicker _picker = ImagePicker();
+
   Future<void> checkImage() async {
-    widget.prefs ??= await SharedPreferences.getInstance();
-    final filename = widget.prefs!.getString(widget.itemName) ?? "";
+    prefs ??= await SharedPreferences.getInstance();
+    final filename = prefs!.getString(widget.itemName) ?? "";
     if (filename == "") return;
 
     final imageTarget = File(filename);
     if (await imageTarget.exists()) {
       setState(() {
-        widget.targetImage = imageTarget;
+        targetImage = imageTarget;
       });
     } else {
       setState(() {
-        widget.targetImage = null;
+        targetImage = null;
       });
     }
   }
@@ -53,7 +51,7 @@ class _AddBTNImageState extends State<AddBTNImage> {
 
   Future<void> pickImage(BuildContext ctx, ImageSource imageSource) async {
     try {
-      final XFile? image = await widget._picker.pickImage(source: imageSource);
+      final XFile? image = await _picker.pickImage(source: imageSource);
       if (image == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -67,10 +65,10 @@ class _AddBTNImageState extends State<AddBTNImage> {
           await getApplicationDocumentsDirectory();
       File imageTarget = File(
           "${appDocumentsDir.path}/${widget.itemName}-${uuid.v4()}${p.extension(image.path)}");
-      widget.prefs!.setString(widget.itemName, imageTarget.path);
+      prefs!.setString(widget.itemName, imageTarget.path);
       File(image.path).copy(imageTarget.path);
       setState(() {
-        widget.targetImage = File(imageTarget.path);
+        targetImage = File(imageTarget.path);
       });
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -123,9 +121,9 @@ class _AddBTNImageState extends State<AddBTNImage> {
           },
           child: Padding(
             padding: EdgeInsets.all(5.0),
-            child: widget.targetImage != null
+            child: targetImage != null
                 ? Image.file(
-                    widget.targetImage!,
+                    targetImage!,
                     width: MediaQuery.of(context).size.width * 0.3,
                   )
                 : Image.asset(
