@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path/path.dart' as p;
 
@@ -13,10 +14,12 @@ class AddBTNImage extends StatefulWidget {
   final String defaultImage = "assets/images/add_btn.png";
   final ImagePicker _picker = ImagePicker();
   String? name;
+  SharedPreferences? prefs;
 
   AddBTNImage(
     this.itemName, {
     super.key,
+    this.prefs,
   });
 
   @override
@@ -27,8 +30,13 @@ class AddBTNImage extends StatefulWidget {
 
 class _AddBTNImageState extends State<AddBTNImage> {
   Future<void> checkImage() async {
+    widget.prefs ??= await SharedPreferences.getInstance();
     final Directory appDocumentsDir = await getApplicationDocumentsDirectory();
-    final imageTarget = File("${appDocumentsDir.path}/${widget.name}");
+    final filename = widget.prefs!.getString(widget.itemName) ?? "";
+    print("FIlename didapat : " + filename);
+    if (filename == "") return;
+
+    final imageTarget = File(filename);
     if (await imageTarget.exists()) {
       setState(() {
         widget.targetImage = imageTarget;
@@ -62,10 +70,9 @@ class _AddBTNImageState extends State<AddBTNImage> {
           await getApplicationDocumentsDirectory();
       File imageTarget = File(
           "${appDocumentsDir.path}/${widget.itemName}-${uuid.v4()}${p.extension(image.path)}");
+      widget.prefs!.setString(widget.itemName, imageTarget.path);
       File(image.path).copy(imageTarget.path);
       setState(() {
-        print(widget.targetImage?.path);
-        print(imageTarget.path);
         widget.targetImage = File(imageTarget.path);
       });
     } catch (e) {
@@ -119,15 +126,15 @@ class _AddBTNImageState extends State<AddBTNImage> {
                 });
           },
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(5.0),
             child: widget.targetImage != null
                 ? Image.file(
                     widget.targetImage!,
-                    width: MediaQuery.of(context).size.width * 0.25,
+                    width: MediaQuery.of(context).size.width * 0.3,
                   )
                 : Image.asset(
                     "assets/images/add_btn.png",
-                    width: MediaQuery.of(context).size.width * 0.25,
+                    width: MediaQuery.of(context).size.width * 0.3,
                   ),
           ),
         ),
