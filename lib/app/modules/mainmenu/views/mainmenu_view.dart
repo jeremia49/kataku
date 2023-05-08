@@ -55,7 +55,9 @@ class MainmenuView extends GetView<MainmenuController> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed('/aktivitas');
+                        },
                         child: Padding(
                           padding: EdgeInsets.all(20.0),
                           child: Image.asset(
