@@ -9,48 +9,46 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Stack(
-          alignment: AlignmentDirectional.center,
-          children: [
-            Image.asset("assets/images/bg_main_menu.jpg"),
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: EdgeInsets.only(left: 60),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    minimumSize:
-                        MaterialStateProperty.all<Size>(const Size(50, 50)),
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromARGB(255, 139, 87, 42),
-                    ),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                        side: const BorderSide(
-                          color: Color.fromARGB(255, 139, 87, 42),
-                        ),
+      body: Stack(
+        alignment: AlignmentDirectional.center,
+        children: [
+          Image.asset("assets/images/bg_main_menu.jpg"),
+          Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: EdgeInsets.only(left: 60),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  minimumSize:
+                      MaterialStateProperty.all<Size>(const Size(50, 50)),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    const Color.fromARGB(255, 139, 87, 42),
+                  ),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                      side: const BorderSide(
+                        color: Color.fromARGB(255, 139, 87, 42),
                       ),
                     ),
                   ),
-                  onPressed: () {
-                    Get.toNamed('/mainmenu');
-                  },
-                  child: const Text(
-                    "Play Now",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.normal),
-                  ),
+                ),
+                onPressed: () {
+                  Get.toNamed('/mainmenu');
+                },
+                child: const Text(
+                  "Play Now",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.normal),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       backgroundColor: const Color.fromARGB(255, 248, 219, 83),
     );

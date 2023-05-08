@@ -222,7 +222,13 @@ class MainmenuView extends GetView<MainmenuController> {
                       ),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Fitur Belum Selesai  !'),
+                          ),
+                        );
+                      },
                       child: Padding(
                         padding: EdgeInsets.all(5.0),
                         child: Image.asset(
@@ -232,6 +238,9 @@ class MainmenuView extends GetView<MainmenuController> {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 20,
                 ),
               ],
             ),
