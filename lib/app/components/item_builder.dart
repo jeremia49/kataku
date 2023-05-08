@@ -107,7 +107,9 @@ class _ImageButtonItemBuilderState extends State<ImageButtonItemBuilder> {
             ),
           );
         }
-        return AddImageButton(widget.category, userAdd);
+        return AddImageButton(widget.category, userAdd, () {
+          setState(() {});
+        });
       },
       itemCount: widget.data.length + userAdd.length + 1,
     );
@@ -115,10 +117,11 @@ class _ImageButtonItemBuilderState extends State<ImageButtonItemBuilder> {
 }
 
 class AddImageButton extends StatefulWidget {
+  final Function onSuccess;
   final String category;
   List<Map<String, String>> userAdd;
 
-  AddImageButton(this.category, this.userAdd, {super.key});
+  AddImageButton(this.category, this.userAdd, this.onSuccess, {super.key});
 
   @override
   State<AddImageButton> createState() => _AddImageButtonState();
@@ -204,7 +207,7 @@ class _AddImageButtonState extends State<AddImageButton> {
             String encodedMap = json.encode(widget.userAdd.toList());
             prefs!.setString('user-${widget.category}', encodedMap);
 
-            setState(() {});
+            widget.onSuccess();
           },
           child: Padding(
             padding: EdgeInsets.all(1.0),
