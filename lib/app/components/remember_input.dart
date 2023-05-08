@@ -3,8 +3,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class RememberTextField extends StatefulWidget {
   final String namaLabel;
-  SharedPreferences? prefs;
-  RememberTextField(this.namaLabel, {super.key, this.prefs});
+  RememberTextField(
+    this.namaLabel, {
+    super.key,
+  });
 
   @override
   State<RememberTextField> createState() => _RememberTextFieldState();
@@ -12,6 +14,7 @@ class RememberTextField extends StatefulWidget {
 
 class _RememberTextFieldState extends State<RememberTextField> {
   final TextEditingController controller = TextEditingController();
+  SharedPreferences? prefs;
 
   void updateValue() async {
     final prefs = await SharedPreferences.getInstance();
@@ -19,8 +22,8 @@ class _RememberTextFieldState extends State<RememberTextField> {
   }
 
   Future<void> initializeTextField() async {
-    widget.prefs ??= await SharedPreferences.getInstance();
-    String value = widget.prefs!.getString("label-${widget.namaLabel}") ?? "";
+    prefs ??= await SharedPreferences.getInstance();
+    String value = prefs!.getString("label-${widget.namaLabel}") ?? "";
     setState(() {
       controller.text = value;
       controller.addListener(updateValue);
