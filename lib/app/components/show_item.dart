@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart' as au;
 
@@ -5,8 +7,10 @@ class ShowItemImage extends StatelessWidget {
   final String namaItem;
   final String gambarItem;
   final String audioSrcItem;
+  final bool isFromAsset;
+
   const ShowItemImage(this.namaItem, this.gambarItem,
-      {super.key, this.audioSrcItem = ""});
+      {super.key, this.audioSrcItem = "", this.isFromAsset = true});
 
   @override
   Widget build(BuildContext context) {
@@ -16,36 +20,46 @@ class ShowItemImage extends StatelessWidget {
           alignment: AlignmentDirectional.center,
           children: [
             Image.asset("assets/images/bg_base.jpg"),
-            Padding(
-              padding: EdgeInsets.only(
-                top: 100,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Image.asset(
-                    "assets/images/btn_keluarga.jpg",
-                    width: MediaQuery.of(context).size.width * 0.7,
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Text(
-                    namaItem,
-                    style: TextStyle(
-                      fontSize: 50,
+            SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: 50,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    () {
+                      if (isFromAsset) {
+                        return Image.asset(
+                          gambarItem,
+                          width: MediaQuery.of(context).size.width * 0.7,
+                        );
+                      }
+                      return Image.file(
+                        File(gambarItem),
+                        width: MediaQuery.of(context).size.width * 0.7,
+                      );
+                    }(),
+                    SizedBox(
+                      height: 40,
                     ),
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  () {
-                    if (audioSrcItem != "") return AudioPlayer(audioSrcItem);
-                    return const SizedBox(
-                      height: 1,
-                    );
-                  }(),
-                ],
+                    Text(
+                      namaItem,
+                      style: TextStyle(
+                        fontSize: 50,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    () {
+                      if (audioSrcItem != "") return AudioPlayer(audioSrcItem);
+                      return const SizedBox(
+                        height: 1,
+                      );
+                    }(),
+                  ],
+                ),
               ),
             ),
             Positioned(

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:kataku/app/components/item_builder.dart';
-import 'package:kataku/app/modules/aktivitas/views/const_aktivitas.dart';
+import 'package:kataku/app/modules/buah/views/const_buah.dart';
 
-import '../controllers/aktivitas_controller.dart';
+import '../controllers/buah_controller.dart';
 
-class AktivitasView extends GetView<AktivitasController> {
-  const AktivitasView({Key? key}) : super(key: key);
+class BuahView extends GetView<BuahController> {
+  const BuahView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +22,7 @@ class AktivitasView extends GetView<AktivitasController> {
                   Padding(
                     padding: EdgeInsets.only(top: 20),
                     child: Image.asset(
-                      "assets/images/btn_keluarga.jpg",
+                      "assets/images/btn_buah.jpg",
                       width: MediaQuery.of(context).size.width * 0.35,
                     ),
                   ),
@@ -30,7 +30,7 @@ class AktivitasView extends GetView<AktivitasController> {
                     height: 30,
                   ),
                   Expanded(
-                    child: ImageButtonItemBuilder(AKTIVITAS, AktivitasList),
+                    child: ImageButtonItemBuilder(BUAH, BUAHList),
                   ),
                 ],
               ),

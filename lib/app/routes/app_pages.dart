@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/aktivitas/bindings/aktivitas_binding.dart';
 import '../modules/aktivitas/views/aktivitas_view.dart';
+import '../modules/buah/bindings/buah_binding.dart';
+import '../modules/buah/views/buah_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/keluarga/bindings/keluarga_binding.dart';
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.AKTIVITAS,
       page: () => const AktivitasView(),
       binding: AktivitasBinding(),
+    ),
+    GetPage(
+      name: _Paths.BUAH,
+      page: () => const BuahView(),
+      binding: BuahBinding(),
     ),
   ];
 }

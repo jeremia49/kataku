@@ -23,7 +23,7 @@ class _RememberTextFieldState extends State<RememberTextField> {
 
   Future<void> initializeTextField() async {
     prefs ??= await SharedPreferences.getInstance();
-    String value = prefs!.getString("label-${widget.namaLabel}") ?? "";
+    String value = prefs!.getString("textInput-${widget.namaLabel}") ?? "";
     setState(() {
       controller.text = value;
       controller.addListener(updateValue);

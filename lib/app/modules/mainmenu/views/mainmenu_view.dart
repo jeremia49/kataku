@@ -75,7 +75,9 @@ class MainmenuView extends GetView<MainmenuController> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed('/buah');
+                        },
                         child: Padding(
                           padding: EdgeInsets.all(20.0),
                           child: Image.asset(

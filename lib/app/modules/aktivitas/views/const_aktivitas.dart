@@ -1,5 +1,7 @@
 import 'package:kataku/app/modules/utils/imageitem.dart';
 
+const String AKTIVITAS = "AKTIVITAS";
+
 List<ImageItem> AktivitasList = [
   ImageItem(
     "Makan",

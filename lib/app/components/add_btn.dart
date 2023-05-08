@@ -28,7 +28,7 @@ class _AddBTNImageState extends State<AddBTNImage> {
 
   Future<void> checkImage() async {
     prefs ??= await SharedPreferences.getInstance();
-    final filename = prefs!.getString(widget.itemName) ?? "";
+    final filename = prefs!.getString("image-${widget.itemName}") ?? "";
     if (filename == "") return;
 
     final imageTarget = File(filename);
@@ -65,8 +65,8 @@ class _AddBTNImageState extends State<AddBTNImage> {
           await getApplicationDocumentsDirectory();
       File imageTarget = File(
           "${appDocumentsDir.path}/${widget.itemName}-${uuid.v4()}${p.extension(image.path)}");
-      prefs!.setString(widget.itemName, imageTarget.path);
-      File(image.path).copy(imageTarget.path);
+      prefs!.setString("image-${widget.itemName}", imageTarget.path);
+      await File(image.path).copy(imageTarget.path);
       setState(() {
         targetImage = File(imageTarget.path);
       });
