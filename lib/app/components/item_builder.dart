@@ -20,12 +20,14 @@ class ImageButtonItemBuilder extends StatelessWidget {
           child: Ink(
             child: InkWell(
               onTap: () async {
-                print(data[index].namaItem);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => ShowItemImage(
-                          data[index].namaItem, data[index].gambarItem)),
+                            data[index].namaItem,
+                            data[index].gambarItem,
+                            audioSrcItem: data[index].audioSrcItem,
+                          )),
                 );
                 // Get
               },

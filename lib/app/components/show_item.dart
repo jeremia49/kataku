@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart' as au;
 
 class ShowItemImage extends StatelessWidget {
   final String namaItem;
   final String gambarItem;
-  const ShowItemImage(this.namaItem, this.gambarItem, {super.key});
+  final String audioSrcItem;
+  const ShowItemImage(this.namaItem, this.gambarItem,
+      {super.key, this.audioSrcItem = ""});
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +39,12 @@ class ShowItemImage extends StatelessWidget {
                   SizedBox(
                     height: 40,
                   ),
-                  InkWell(
-                    onTap: () {
-                      print("ditekan");
-                    },
-                    child: Icon(
-                      Icons.volume_up_rounded,
-                      size: 100,
-                    ),
-                  ),
+                  () {
+                    if (audioSrcItem != "") return AudioPlayer(audioSrcItem);
+                    return const SizedBox(
+                      height: 1,
+                    );
+                  }(),
                 ],
               ),
             ),
@@ -64,5 +64,47 @@ class ShowItemImage extends StatelessWidget {
       ),
       backgroundColor: Color.fromARGB(255, 255, 246, 129),
     );
+  }
+}
+
+class AudioPlayer extends StatefulWidget {
+  final String src;
+  const AudioPlayer(this.src, {super.key});
+
+  @override
+  State<AudioPlayer> createState() => _AudioPlayerState();
+}
+
+class _AudioPlayerState extends State<AudioPlayer> {
+  final player = au.AudioPlayer();
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () async {
+        if (player.source != null) {
+          await player.stop();
+          await player.play(
+            player.source!,
+            mode: au.PlayerMode.lowLatency,
+            position: const Duration(seconds: 0),
+          );
+        }
+      },
+      child: const Icon(
+        Icons.volume_up_rounded,
+        size: 100,
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
+
+  void init() async {
+    await player.setSource(au.AssetSource(widget.src));
   }
 }

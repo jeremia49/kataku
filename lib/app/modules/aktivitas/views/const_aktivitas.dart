@@ -4,6 +4,7 @@ List<ImageItem> AktivitasList = [
   ImageItem(
     "Makan",
     "assets/images/btn_keluarga.jpg",
+    audioSrcItem: "sounds/berlari.mp3",
   ),
   ImageItem(
     "Minum",

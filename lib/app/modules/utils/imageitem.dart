@@ -1,7 +1,7 @@
 class ImageItem {
   final String namaItem;
   final String gambarItem;
-  final String tts;
+  final String audioSrcItem;
 
-  ImageItem(this.namaItem, this.gambarItem, {this.tts = ""});
+  ImageItem(this.namaItem, this.gambarItem, {this.audioSrcItem = ""});
 }
