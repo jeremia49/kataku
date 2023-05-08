@@ -82,14 +82,10 @@ class _AudioPlayerState extends State<AudioPlayer> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        if (player.source != null) {
-          await player.stop();
-          await player.play(
-            player.source!,
-            mode: au.PlayerMode.lowLatency,
-            position: const Duration(seconds: 0),
-          );
-        }
+        await player.play(
+          player.source!,
+          position: const Duration(milliseconds: 0),
+        );
       },
       child: const Icon(
         Icons.volume_up_rounded,
