@@ -27,4 +27,18 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/aktivitas/
+    - assets/images/buah/
+    - assets/images/hewan/
+    - assets/images/perasaan/
+    - assets/images/bagiantubuh/
+    - assets/images/angka/
+    - assets/images/bentuk/
+    - assets/images/huruf/
+    - assets/images/rumah/
+    - assets/images/sekolah/
+    - assets/images/warna/
+
+    
+    
     - assets/sounds/

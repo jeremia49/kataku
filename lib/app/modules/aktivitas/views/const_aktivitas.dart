@@ -5,43 +5,42 @@ const String AKTIVITAS = "AKTIVITAS";
 List<ImageItem> AktivitasList = [
   ImageItem(
     "Makan",
-    "assets/images/btn_keluarga.jpg",
-    audioSrcItem: "sounds/berlari.mp3",
+    "assets/images/aktivitas/makan.jpg",
+    audioSrcItem: "sounds/makan.mp3",
   ),
   ImageItem(
     "Minum",
-    "assets/images/btn_keluarga.jpg",
+    "assets/images/aktivitas/minum.jpg",
+    audioSrcItem: "sounds/minum.mp3",
   ),
   ImageItem(
     "Berjalan",
-    "assets/images/btn_keluarga.jpg",
+    "assets/images/aktivitas/berjalan.jpg",
+    audioSrcItem: "sounds/berjalan.mp3",
   ),
   ImageItem(
     "Berlari",
-    "assets/images/btn_keluarga.jpg",
+    "assets/images/aktivitas/berlari.jpg",
+    audioSrcItem: "sounds/berlari.mp3",
   ),
   ImageItem(
     "Bersepeda",
-    "assets/images/btn_keluarga.jpg",
+    "assets/images/aktivitas/bersepeda.jpg",
+    audioSrcItem: "sounds/bersepeda.mp3",
   ),
   ImageItem(
     "Membaca",
-    "assets/images/btn_keluarga.jpg",
+    "assets/images/aktivitas/membaca.jpg",
+    audioSrcItem: "sounds/membaca.mp3",
   ),
   ImageItem(
     "Menulis",
-    "assets/images/btn_keluarga.jpg",
+    "assets/images/aktivitas/menulis.jpg",
+    audioSrcItem: "sounds/menulis.mp3",
   ),
   ImageItem(
     "Berenang",
-    "assets/images/btn_keluarga.jpg",
+    "assets/images/aktivitas/berenang.jpg",
+    audioSrcItem: "sounds/berenang.mp3",
   ),
 ];
-
-
-//   {
-//     "namaitem" : "apel",
-//     "gambaritem" : "assets/images/btn_keluarga.jpg",
-//     "tts" : "",
-//    },
-// ]

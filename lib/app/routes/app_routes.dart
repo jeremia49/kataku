@@ -8,6 +8,16 @@ abstract class Routes {
   static const KELUARGA = _Paths.KELUARGA;
   static const AKTIVITAS = _Paths.AKTIVITAS;
   static const BUAH = _Paths.BUAH;
+  static const HEWAN = _Paths.HEWAN;
+  static const BAGIANTUBUH = _Paths.BAGIANTUBUH;
+  static const WARNA = _Paths.WARNA;
+  static const BENTUK = _Paths.BENTUK;
+  static const PAKAIAN = _Paths.PAKAIAN;
+  static const RUMAH = _Paths.RUMAH;
+  static const SEKOLAH = _Paths.SEKOLAH;
+  static const ANGKA = _Paths.ANGKA;
+  static const HURUF = _Paths.HURUF;
+  static const PERASAAN = _Paths.PERASAAN;
 }
 
 abstract class _Paths {
@@ -17,4 +27,14 @@ abstract class _Paths {
   static const KELUARGA = '/keluarga';
   static const AKTIVITAS = '/aktivitas';
   static const BUAH = '/buah';
+  static const HEWAN = '/hewan';
+  static const BAGIANTUBUH = '/bagiantubuh';
+  static const WARNA = '/warna';
+  static const BENTUK = '/bentuk';
+  static const PAKAIAN = '/pakaian';
+  static const RUMAH = '/rumah';
+  static const SEKOLAH = '/sekolah';
+  static const ANGKA = '/angka';
+  static const HURUF = '/huruf';
+  static const PERASAAN = '/perasaan';
 }
