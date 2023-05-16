@@ -21,7 +21,7 @@ class AngkaView extends GetView<AngkaController> {
                 Padding(
                   padding: EdgeInsets.only(top: 20),
                   child: Image.asset(
-                    "assets/images/btn_warna.jpg",
+                    "assets/images/btn_angka.jpg",
                     width: MediaQuery.of(context).size.width * 0.35,
                   ),
                 ),

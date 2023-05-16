@@ -51,7 +51,7 @@ List<ImageItem> HURUFList = [
   ImageItem(
     "J",
     "assets/images/huruf/j.png",
-    audioSrcItem: "sounds/e.mp3",
+    audioSrcItem: "sounds/j.mp3",
   ),
   ImageItem(
     "K",
@@ -115,8 +115,8 @@ List<ImageItem> HURUFList = [
   ),
   ImageItem(
     "W",
-    "assets/images/huruf/v.png",
-    audioSrcItem: "sounds/v.mp3",
+    "assets/images/huruf/w.png",
+    audioSrcItem: "sounds/w.mp3",
   ),
   ImageItem(
     "X",

@@ -61,7 +61,7 @@ List<ImageItem> ANGKAList = [
   ImageItem(
     "Dua Belas",
     "assets/images/angka/duabelas.png",
-    audioSrcItem: "sounds/dua.mp3",
+    audioSrcItem: "sounds/duabelas.mp3",
   ),
   ImageItem(
     "Tiga Belas",
