@@ -79,7 +79,7 @@ List<ImageItem> SEKOLAHList = [
     audioSrcItem: "sounds/sempoa.mp3",
   ),
   ImageItem(
-    "Bola dunia",
+    "Bola Dunia",
     "assets/images/sekolah/boladunia.png",
     audioSrcItem: "sounds/boladunia.mp3",
   ),
