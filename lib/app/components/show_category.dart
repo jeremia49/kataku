@@ -1,13 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
 import 'package:kataku/app/components/item_builder.dart';
-import 'package:kataku/app/modules/pakaian/views/const_pakaian.dart';
 
-import '../controllers/pakaian_controller.dart';
+class showCategory extends StatefulWidget {
+  final String categoryImage;
+  final String categoryName;
+  const showCategory(this.categoryName, this.categoryImage, {super.key});
 
-class PakaianView extends GetView<PakaianController> {
-  const PakaianView({Key? key}) : super(key: key);
+  @override
+  State<showCategory> createState() => _showCategoryState();
+}
+
+class _showCategoryState extends State<showCategory> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -19,8 +25,8 @@ class PakaianView extends GetView<PakaianController> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(top: 20),
-                  child: Image.asset(
-                    "assets/images/btn_pakaian.jpg",
+                  child: Image.file(
+                    File(widget.categoryImage),
                     width: MediaQuery.of(context).size.width * 0.35,
                   ),
                 ),
@@ -28,7 +34,8 @@ class PakaianView extends GetView<PakaianController> {
                   height: 30,
                 ),
                 Expanded(
-                  child: ImageButtonItemBuilder(PAKAIAN, PAKAIANList),
+                  child:
+                      ImageButtonItemBuilder(widget.categoryName, List.empty()),
                 ),
               ],
             ),
@@ -38,7 +45,7 @@ class PakaianView extends GetView<PakaianController> {
             top: 10,
             child: IconButton(
               onPressed: () {
-                Get.back();
+                Navigator.of(context).pop();
               },
               icon: Image.asset("assets/images/home_btn.png"),
               iconSize: 50,

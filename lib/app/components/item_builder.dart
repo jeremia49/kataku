@@ -58,53 +58,20 @@ class _ImageButtonItemBuilderState extends State<ImageButtonItemBuilder> {
       ),
       itemBuilder: (BuildContext ctx, int index) {
         if (index < widget.data.length) {
-          return Material(
-            type: MaterialType.transparency,
-            child: Ink(
-              child: InkWell(
-                onTap: () async {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ShowItemImage(
-                              widget.data[index].namaItem,
-                              widget.data[index].gambarItem,
-                              audioSrcItem: widget.data[index].audioSrcItem,
-                            )),
-                  );
-                },
-                child: Padding(
-                  padding: EdgeInsets.all(1.0),
-                  child: Image.asset(widget.data[index].gambarItem),
-                ),
-              ),
-            ),
+          return ImageClassExtended(
+            widget.category,
+            widget.data[index].namaItem,
+            widget.data[index].gambarItem,
+            isFromAsset: true,
+            audioSrcItem: widget.data[index].audioSrcItem,
           );
         }
         if (index < widget.data.length + userAdd.length) {
-          print('harusnya masuk');
-          return Material(
-            type: MaterialType.transparency,
-            child: Ink(
-              child: InkWell(
-                onTap: () async {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ShowItemImage(
-                              userAdd[index - widget.data.length].keys.first,
-                              userAdd[index - widget.data.length].values.first,
-                              isFromAsset: false,
-                            )),
-                  );
-                },
-                child: Padding(
-                  padding: EdgeInsets.all(1.0),
-                  child: Image.file(
-                      File(userAdd[index - widget.data.length].values.first)),
-                ),
-              ),
-            ),
+          return ImageClassExtended(
+            widget.category,
+            userAdd[index - widget.data.length].keys.first,
+            userAdd[index - widget.data.length].values.first,
+            isFromAsset: false,
           );
         }
         return AddImageButton(widget.category, userAdd, () {
@@ -260,5 +227,142 @@ class _AddImageButtonState extends State<AddImageButton> {
 
   void init() async {
     prefs ??= await SharedPreferences.getInstance();
+  }
+}
+
+class ImageClassExtended extends StatefulWidget {
+  final String category;
+  final String namaItem;
+  final String gambarItem;
+  final String audioSrcItem;
+  final bool isFromAsset;
+
+  const ImageClassExtended(
+    this.category,
+    this.namaItem,
+    this.gambarItem, {
+    super.key,
+    this.isFromAsset = false,
+    this.audioSrcItem = "",
+  });
+
+  @override
+  State<ImageClassExtended> createState() => _ImageClassExtendedState();
+}
+
+class _ImageClassExtendedState extends State<ImageClassExtended> {
+  final ImagePicker _picker = ImagePicker();
+  SharedPreferences? prefs;
+  String? prefImage;
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  void init() async {
+    prefs ??= await SharedPreferences.getInstance();
+    // prefs!.setString('user-${widget.category}', encodedMap);
+    prefImage = prefs!.getString('user-${widget.category}-${widget.namaItem}');
+    if (prefImage == null) return;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      type: MaterialType.transparency,
+      child: Ink(
+        child: InkWell(
+          onLongPress: () async {
+            final String? imagePath =
+                await pickImage(context, ImageSource.camera);
+            if (imagePath == null) return;
+            prefs?.setString(
+                'user-${widget.category}-${widget.namaItem}', imagePath);
+            prefImage = imagePath;
+            setState(() {});
+          },
+          onTap: () async {
+            if (prefImage == null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ShowItemImage(
+                    widget.namaItem,
+                    widget.gambarItem,
+                    audioSrcItem: widget.audioSrcItem,
+                    isFromAsset: widget.isFromAsset,
+                  ),
+                ),
+              );
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ShowItemImage(
+                    widget.namaItem,
+                    prefImage!,
+                    audioSrcItem: widget.audioSrcItem,
+                    isFromAsset: false,
+                  ),
+                ),
+              );
+            }
+          },
+          child: Padding(
+            padding: EdgeInsets.all(1.0),
+            child: () {
+              if (prefImage == null) {
+                if (widget.isFromAsset) {
+                  return Image.asset(
+                    widget.gambarItem,
+                  );
+                }
+                return Image.file(
+                  File(widget.gambarItem),
+                );
+              }
+              return Image.file(
+                File(prefImage!),
+              );
+            }(),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<String?> pickImage(BuildContext ctx, ImageSource imageSource) async {
+    try {
+      final XFile? image = await _picker.pickImage(source: imageSource);
+      if (image == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Gagal menerima file'),
+          ),
+        );
+        return null;
+      }
+      var uuid = Uuid();
+      final Directory appDocumentsDir =
+          await getApplicationDocumentsDirectory();
+      File imageTarget = File(
+          "${appDocumentsDir.path}/${widget.category}-${uuid.v4()}${p.extension(image.path)}");
+      await File(image.path).copy(imageTarget.path);
+      return imageTarget.path;
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Gagal menyimpan file'),
+        ),
+      );
+      return null;
+    }
   }
 }

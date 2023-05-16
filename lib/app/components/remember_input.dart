@@ -32,8 +32,8 @@ class _RememberTextFieldState extends State<RememberTextField> {
 
   @override
   void initState() {
-    super.initState();
     initializeTextField();
+    super.initState();
   }
 
   @override

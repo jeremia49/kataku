@@ -1,7 +1,15 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:kataku/app/components/new_category.dart';
 import 'package:kataku/app/components/remember_input.dart';
+import 'package:kataku/app/components/show_category.dart';
+import 'package:kataku/app/modules/mainmenu/views/const_mainmenu.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../components/add_btn.dart';
 import '../controllers/mainmenu_controller.dart';
@@ -18,6 +26,7 @@ class MainmenuView extends GetView<MainmenuController> {
           Image.asset("assets/images/bg_base.jpg"),
           SingleChildScrollView(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
@@ -34,234 +43,7 @@ class MainmenuView extends GetView<MainmenuController> {
                 SizedBox(
                   height: 20,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/keluarga');
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Image.asset(
-                          "assets/images/btn_keluarga.jpg",
-                          width: MediaQuery.of(context).size.width * 0.25,
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/aktivitas');
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Image.asset(
-                          "assets/images/btn_aktivitas.jpg",
-                          width: MediaQuery.of(context).size.width * 0.25,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/buah');
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Image.asset(
-                          "assets/images/btn_buah.jpg",
-                          width: MediaQuery.of(context).size.width * 0.25,
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/perasaan');
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Image.asset(
-                          "assets/images/btn_perasaan.jpg",
-                          width: MediaQuery.of(context).size.width * 0.25,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/hewan');
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Image.asset(
-                          "assets/images/btn_hewan.jpg",
-                          width: MediaQuery.of(context).size.width * 0.25,
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/bagiantubuh');
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Image.asset(
-                          "assets/images/btn_bagiantubuh.jpg",
-                          width: MediaQuery.of(context).size.width * 0.25,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/warna');
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Image.asset(
-                          "assets/images/btn_warna.jpg",
-                          width: MediaQuery.of(context).size.width * 0.25,
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/bentuk');
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Image.asset(
-                          "assets/images/btn_bentuk.jpg",
-                          width: MediaQuery.of(context).size.width * 0.25,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/pakaian');
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Image.asset(
-                          "assets/images/btn_pakaian.jpg",
-                          width: MediaQuery.of(context).size.width * 0.25,
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/rumah');
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Image.asset(
-                          "assets/images/btn_rumah.jpg",
-                          width: MediaQuery.of(context).size.width * 0.25,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/sekolah');
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Image.asset(
-                          "assets/images/btn_sekolah.jpg",
-                          width: MediaQuery.of(context).size.width * 0.25,
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/angka');
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Image.asset(
-                          "assets/images/btn_angka.jpg",
-                          width: MediaQuery.of(context).size.width * 0.25,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/huruf');
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Image.asset(
-                          "assets/images/btn_huruf.jpg",
-                          width: MediaQuery.of(context).size.width * 0.25,
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Fitur Belum Selesai  !'),
-                          ),
-                        );
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Image.asset(
-                          "assets/images/add_btn.png",
-                          width: MediaQuery.of(context).size.width * 0.25,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
+                MainMenuListWidget(mainMenuList),
               ],
             ),
           ),
@@ -279,6 +61,105 @@ class MainmenuView extends GetView<MainmenuController> {
         ],
       ),
       backgroundColor: Color.fromARGB(255, 255, 246, 129),
+    );
+  }
+}
+
+class MainMenuListWidget extends StatefulWidget {
+  final List<MainMenuItem> originalItem;
+  const MainMenuListWidget(this.originalItem, {super.key});
+
+  @override
+  State<MainMenuListWidget> createState() => _MainMenuListWidgetState();
+}
+
+class _MainMenuListWidgetState extends State<MainMenuListWidget> {
+  SharedPreferences? prefs;
+  List<Map<String, String>> userAdd = List.empty(
+    growable: true,
+  );
+
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
+
+  void init() async {
+    prefs ??= await SharedPreferences.getInstance();
+    // prefs!.setString('user-${widget.category}', encodedMap);
+    final String? useradd = prefs!.getString('category');
+    if (useradd == null) return;
+
+    final List<dynamic> listUserAdd = json.decode(useradd);
+    for (var el in listUserAdd) {
+      Map<String, String> map = el.cast<String, String>();
+      userAdd.add(map);
+    }
+    setState(() {});
+    // userAdd = json.decode(useradd) as List<Map<String, String>>;
+    print(userAdd);
+    // userAdd
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 20,
+        ),
+        itemBuilder: (BuildContext ctx, int index) {
+          if (index < widget.originalItem.length) {
+            return InkWell(
+              onTap: () {
+                Get.toNamed(widget.originalItem[index].hyperlink);
+              },
+              child: Padding(
+                padding: EdgeInsets.all(5.0),
+                child: Image.asset(
+                  widget.originalItem[index].imgpath,
+                  width: MediaQuery.of(context).size.width * 0.25,
+                ),
+              ),
+            );
+          }
+          if (index < widget.originalItem.length + userAdd.length) {
+            return InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => showCategory(
+                      userAdd[index - widget.originalItem.length].keys.first,
+                      userAdd[index - widget.originalItem.length].values.first,
+                    ),
+                  ),
+                );
+                // Nama : userAdd[index - widget.data.length].keys.first
+                // Data gambar : userAdd[index - widget.originalItem.length].values.first
+              },
+              child: Padding(
+                padding: EdgeInsets.all(5.0),
+                child: Image.file(
+                  File(
+                      userAdd[index - widget.originalItem.length].values.first),
+                  width: MediaQuery.of(context).size.width * 0.25,
+                ),
+              ),
+            );
+          }
+          return AddCategoryButton(userAdd, () {
+            setState(() {});
+          });
+        },
+        itemCount: widget.originalItem.length + userAdd.length + 1,
+      ),
     );
   }
 }
