@@ -11,12 +11,12 @@ List<ImageItem> BENTUKList = [
   ImageItem(
     "Belah Ketupat",
     "assets/images/bentuk/belahketupat.png",
-    audioSrcItem: "sounds/belahKetupat.mp3",
+    audioSrcItem: "sounds/belahketupat.mp3",
   ),
   ImageItem(
     "Layang Layang",
     "assets/images/bentuk/layanglayang.png",
-    audioSrcItem: "sounds/layangLayang.mp3",
+    audioSrcItem: "sounds/layanglayang.mp3",
   ),
   ImageItem(
     "Trapesium",
@@ -31,12 +31,12 @@ List<ImageItem> BENTUKList = [
   ImageItem(
     "Persegi Panjang",
     "assets/images/bentuk/persegipanjang.png",
-    audioSrcItem: "sounds/persegiPanjang.mp3",
+    audioSrcItem: "sounds/persegipanjang.mp3",
   ),
   ImageItem(
     "Jajar Genjang",
     "assets/images/bentuk/jajargenjang.png",
-    audioSrcItem: "sounds/jajarGenjang.mp3",
+    audioSrcItem: "sounds/jajargenjang.mp3",
   ),
   ImageItem(
     "Lingkaran",
