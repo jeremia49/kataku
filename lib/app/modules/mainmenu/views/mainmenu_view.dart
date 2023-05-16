@@ -146,7 +146,9 @@ class MainmenuView extends GetView<MainmenuController> {
                       ),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed('/bentuk');
+                      },
                       child: Padding(
                         padding: EdgeInsets.all(5.0),
                         child: Image.asset(
@@ -164,7 +166,9 @@ class MainmenuView extends GetView<MainmenuController> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed('/pakaian');
+                      },
                       child: Padding(
                         padding: EdgeInsets.all(5.0),
                         child: Image.asset(
@@ -174,7 +178,9 @@ class MainmenuView extends GetView<MainmenuController> {
                       ),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed('/rumah');
+                      },
                       child: Padding(
                         padding: EdgeInsets.all(5.0),
                         child: Image.asset(
@@ -192,7 +198,9 @@ class MainmenuView extends GetView<MainmenuController> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed('/sekolah');
+                      },
                       child: Padding(
                         padding: EdgeInsets.all(5.0),
                         child: Image.asset(
@@ -202,7 +210,9 @@ class MainmenuView extends GetView<MainmenuController> {
                       ),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed('/angka');
+                      },
                       child: Padding(
                         padding: EdgeInsets.all(5.0),
                         child: Image.asset(
@@ -220,7 +230,9 @@ class MainmenuView extends GetView<MainmenuController> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed('/huruf');
+                      },
                       child: Padding(
                         padding: EdgeInsets.all(5.0),
                         child: Image.asset(
