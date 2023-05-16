@@ -13,7 +13,9 @@ import 'package:path/path.dart' as p;
 class ImageButtonItemBuilder extends StatefulWidget {
   final String category;
   final List<ImageItem> data;
-  const ImageButtonItemBuilder(this.category, this.data, {super.key});
+  final bool withoutAdd;
+  const ImageButtonItemBuilder(this.category, this.data,
+      {super.key, this.withoutAdd = false});
 
   @override
   State<ImageButtonItemBuilder> createState() => _ImageButtonItemBuilderState();
@@ -51,35 +53,39 @@ class _ImageButtonItemBuilderState extends State<ImageButtonItemBuilder> {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        crossAxisSpacing: 5,
-        mainAxisSpacing: 20,
-      ),
-      itemBuilder: (BuildContext ctx, int index) {
-        if (index < widget.data.length) {
-          return ImageClassExtended(
-            widget.category,
-            widget.data[index].namaItem,
-            widget.data[index].gambarItem,
-            isFromAsset: true,
-            audioSrcItem: widget.data[index].audioSrcItem,
-          );
-        }
-        if (index < widget.data.length + userAdd.length) {
-          return ImageClassExtended(
-            widget.category,
-            userAdd[index - widget.data.length].keys.first,
-            userAdd[index - widget.data.length].values.first,
-            isFromAsset: false,
-          );
-        }
-        return AddImageButton(widget.category, userAdd, () {
-          setState(() {});
-        });
-      },
-      itemCount: widget.data.length + userAdd.length + 1,
-    );
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 5,
+          mainAxisSpacing: 20,
+        ),
+        itemBuilder: (BuildContext ctx, int index) {
+          if (index < widget.data.length) {
+            return ImageClassExtended(
+              widget.category,
+              widget.data[index].namaItem,
+              widget.data[index].gambarItem,
+              isFromAsset: true,
+              audioSrcItem: widget.data[index].audioSrcItem,
+            );
+          }
+          if (index < widget.data.length + userAdd.length) {
+            return ImageClassExtended(
+              widget.category,
+              userAdd[index - widget.data.length].keys.first,
+              userAdd[index - widget.data.length].values.first,
+              isFromAsset: false,
+            );
+          }
+          return AddImageButton(widget.category, userAdd, () {
+            setState(() {});
+          });
+        },
+        itemCount: () {
+          if (widget.withoutAdd) {
+            return widget.data.length;
+          }
+          return widget.data.length + userAdd.length + 1;
+        }());
   }
 }
 

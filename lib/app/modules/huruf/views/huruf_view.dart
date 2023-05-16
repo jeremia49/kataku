@@ -28,7 +28,11 @@ class HurufView extends GetView<HurufController> {
                   height: 30,
                 ),
                 Expanded(
-                  child: ImageButtonItemBuilder(HURUF, HURUFList),
+                  child: ImageButtonItemBuilder(
+                    HURUF,
+                    HURUFList,
+                    withoutAdd: true,
+                  ),
                 ),
               ],
             ),

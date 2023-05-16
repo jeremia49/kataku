@@ -29,7 +29,11 @@ class AngkaView extends GetView<AngkaController> {
                   height: 30,
                 ),
                 Expanded(
-                  child: ImageButtonItemBuilder(ANGKA, ANGKAList),
+                  child: ImageButtonItemBuilder(
+                    ANGKA,
+                    ANGKAList,
+                    withoutAdd: true,
+                  ),
                 ),
               ],
             ),
