@@ -272,6 +272,7 @@ class _ImageClassExtendedState extends State<ImageClassExtended> {
     // prefs!.setString('user-${widget.category}', encodedMap);
     prefImage = prefs!.getString('user-${widget.category}-${widget.namaItem}');
     if (prefImage == null) return;
+    setState(() {});
   }
 
   @override
