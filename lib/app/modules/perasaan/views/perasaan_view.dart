@@ -21,7 +21,7 @@ class PerasaanView extends GetView<PerasaanController> {
                 Padding(
                   padding: EdgeInsets.only(top: 20),
                   child: Image.asset(
-                    "assets/images/btn_aktivitas.jpg",
+                    "assets/images/btn_perasaan.jpg",
                     width: MediaQuery.of(context).size.width * 0.35,
                   ),
                 ),
