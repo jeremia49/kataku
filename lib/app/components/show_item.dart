@@ -338,7 +338,7 @@ class _AudioPlayerState extends State<AudioPlayer> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 ListTile(
-                  leading: Icon(Icons.photo),
+                  leading: Icon(Icons.music_note),
                   title: Text("Pilih dari File"),
                   onTap: () async {
                     if (!context.mounted) return;
