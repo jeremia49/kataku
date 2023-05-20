@@ -18,6 +18,7 @@ abstract class Routes {
   static const ANGKA = _Paths.ANGKA;
   static const HURUF = _Paths.HURUF;
   static const PERASAAN = _Paths.PERASAAN;
+  static const PANDUAN = _Paths.PANDUAN;
 }
 
 abstract class _Paths {
@@ -37,4 +38,5 @@ abstract class _Paths {
   static const ANGKA = '/angka';
   static const HURUF = '/huruf';
   static const PERASAAN = '/perasaan';
+  static const PANDUAN = '/panduan';
 }

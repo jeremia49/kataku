@@ -44,6 +44,40 @@ class HomeView extends GetView<HomeController> {
               ),
             ),
           ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: ElevatedButton(
+              style: ButtonStyle(
+                minimumSize:
+                    MaterialStateProperty.all<Size>(const Size(50, 50)),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  const Color.fromARGB(255, 139, 87, 42),
+                ),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                    side: const BorderSide(
+                      color: Color.fromARGB(255, 139, 87, 42),
+                    ),
+                  ),
+                ),
+              ),
+              onPressed: () {
+                Get.toNamed('/panduan');
+              },
+              child: Padding(
+                padding: EdgeInsets.all(5),
+                child: const Text(
+                  "Panduan",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.normal),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
       backgroundColor: const Color.fromARGB(255, 248, 219, 83),

@@ -22,6 +22,8 @@ import '../modules/mainmenu/bindings/mainmenu_binding.dart';
 import '../modules/mainmenu/views/mainmenu_view.dart';
 import '../modules/pakaian/bindings/pakaian_binding.dart';
 import '../modules/pakaian/views/pakaian_view.dart';
+import '../modules/panduan/bindings/panduan_binding.dart';
+import '../modules/panduan/views/panduan_view.dart';
 import '../modules/perasaan/bindings/perasaan_binding.dart';
 import '../modules/perasaan/views/perasaan_view.dart';
 import '../modules/rumah/bindings/rumah_binding.dart';
@@ -113,6 +115,11 @@ class AppPages {
       name: _Paths.PERASAAN,
       page: () => const PerasaanView(),
       binding: PerasaanBinding(),
+    ),
+    GetPage(
+      name: _Paths.PANDUAN,
+      page: () => const PanduanView(),
+      binding: PanduanBinding(),
     ),
   ];
 }
