@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart' as au;
@@ -10,8 +11,9 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path/path.dart' as p;
+import 'package:record/record.dart';
 
-class ShowItemImage extends StatelessWidget {
+class ShowItemImage extends StatefulWidget {
   final String namaItem;
   final String gambarItem;
   final String audioSrcItem;
@@ -20,6 +22,44 @@ class ShowItemImage extends StatelessWidget {
 
   const ShowItemImage(this.namaItem, this.category, this.gambarItem,
       {super.key, this.audioSrcItem = "", this.isFromAsset = true});
+
+  @override
+  State<ShowItemImage> createState() => _ShowItemImageState();
+}
+
+class _ShowItemImageState extends State<ShowItemImage> {
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
+
+  Future<void> init() async {
+    if (!await Permission.microphone.request().isGranted) {
+      await Permission.microphone.request();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Akses mikrophone diperlukan!'),
+        ),
+      );
+      return;
+    }
+
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    if (androidInfo.version.sdkInt < 33) {
+      if (!await Permission.storage.request().isGranted) {
+        if (await Permission.storage.request() != PermissionStatus.granted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Akses storage diperlukan!'),
+            ),
+          );
+        }
+        return;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,31 +78,23 @@ class ShowItemImage extends StatelessWidget {
                 children: [
                   () {
                     return ImageWithEdit(
-                      category,
-                      namaItem,
-                      gambarItem,
-                      isFromAsset: isFromAsset,
+                      widget.category,
+                      widget.namaItem,
+                      widget.gambarItem,
+                      isFromAsset: widget.isFromAsset,
                       width: 0.7,
                     );
-                    // if (isFromAsset) {
-                    //   return Image.asset(
-                    //     gambarItem,
-                    //     width: MediaQuery.of(context).size.width * 0.7,
-                    //   );
-                    // }
-                    // return Image.file(
-                    //   File(gambarItem),
-                    //   width: MediaQuery.of(context).size.width * 0.7,
-                    // );
                   }(),
                   SizedBox(
                     height: 40,
                   ),
-                  secondText(category: category, namaItem: namaItem),
+                  secondText(
+                      category: widget.category, namaItem: widget.namaItem),
                   SizedBox(
                     height: 40,
                   ),
-                  AudioPlayer(category, namaItem, audioSrcItem),
+                  AudioPlayer(
+                      widget.category, widget.namaItem, widget.audioSrcItem),
                 ],
               ),
             ),
@@ -216,57 +248,131 @@ class AudioPlayer extends StatefulWidget {
 
 class _AudioPlayerState extends State<AudioPlayer> {
   final player = au.AudioPlayer();
+  final record = Record();
   IconData ic = Icons.volume_up_rounded;
   SharedPreferences? prefs;
   String? prefSound;
+  bool isRecording = false;
+
+  Future<void> pickAudio(BuildContext context, {bool isRecord = false}) async {
+    if (isRecord) {
+      if (await record.hasPermission()) {
+        var uuid = Uuid();
+        final Directory appDocumentsDir =
+            await getApplicationDocumentsDirectory();
+        File audioTarget =
+            File("${appDocumentsDir.path}/${widget.category}-${uuid.v4()}.wav");
+        await prefs!.setString(
+            'audio-${widget.category}-${widget.namaItem}', audioTarget.path);
+        prefSound = audioTarget.path;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Rekaman dimulai'),
+          ),
+        );
+        setState(() {
+          ic = Icons.stop;
+          isRecording = true;
+        });
+        await record.start(
+          path: audioTarget.path,
+          encoder: AudioEncoder.wav,
+          bitRate: 128000,
+          samplingRate: 44100,
+        );
+        return;
+      }
+    } else {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.audio,
+      );
+      // print(result);
+      if (result != null) {
+        PlatformFile file = result.files.first;
+        try {
+          var uuid = Uuid();
+          final Directory appDocumentsDir =
+              await getApplicationDocumentsDirectory();
+          File audioTarget = File(
+              "${appDocumentsDir.path}/${widget.category}-${uuid.v4()}${file.extension}");
+          await File(file.path!).copy(audioTarget.path);
+          await prefs!.setString(
+              'audio-${widget.category}-${widget.namaItem}', audioTarget.path);
+          prefSound = audioTarget.path;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('File berhasil disimpan'),
+            ),
+          );
+          setState(() {});
+        } catch (e) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Gagal menyimpan file'),
+            ),
+          );
+        }
+        return;
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Operasi dibatalkan !'),
+          duration: Duration(seconds: 1),
+        ),
+      );
+      return;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onLongPress: () async {
-        setState(() {
-          ic = Icons.mic;
-        });
-        FilePickerResult? result = await FilePicker.platform.pickFiles(
-          type: FileType.audio,
-        );
-        if (result != null) {
-          PlatformFile file = result.files.first;
-          try {
-            var uuid = Uuid();
-            final Directory appDocumentsDir =
-                await getApplicationDocumentsDirectory();
-            File imageTarget = File(
-                "${appDocumentsDir.path}/${widget.category}-${uuid.v4()}${file.extension}");
-            await File(file.path!).copy(imageTarget.path);
-            await prefs!.setString(
-                'audio-${widget.category}-${widget.namaItem}',
-                imageTarget.path);
-            prefSound = imageTarget.path;
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('File berhasil disimpan'),
-              ),
-            );
-            setState(() {});
-          } catch (e) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Gagal menyimpan file'),
-              ),
-            );
-          }
+        if (isRecording) {
           return;
         }
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Operasi dibatalkan !'),
-            duration: Duration(seconds: 1),
-          ),
+        return showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  leading: Icon(Icons.photo),
+                  title: Text("Pilih dari File"),
+                  onTap: () async {
+                    if (!context.mounted) return;
+                    await pickAudio(context, isRecord: false);
+                    Navigator.of(context).pop();
+                  },
+                ),
+                ListTile(
+                    leading: Icon(Icons.mic),
+                    title: Text("Rekam Suara"),
+                    onTap: () async {
+                      if (!context.mounted) return;
+                      await pickAudio(context, isRecord: true);
+                      Navigator.of(context).pop();
+                    }),
+              ],
+            );
+          },
         );
-        return;
       },
       onTap: () async {
+        if (isRecording) {
+          await record.stop();
+          setState(() {
+            isRecording = false;
+            ic = Icons.volume_up_rounded;
+          });
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('File berhasil disimpan'),
+            ),
+          );
+          return;
+        }
         if ((prefSound == null || prefSound!.isEmpty) && widget.src.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -305,26 +411,15 @@ class _AudioPlayerState extends State<AudioPlayer> {
   void init() async {
     prefs ??= await SharedPreferences.getInstance();
     // await player.setSource(au.AssetSource(widget.src));
-
-    if (await Permission.storage.isGranted) {
-    } else if (!(await Permission.storage.isPermanentlyDenied)) {
-      final status = await Permission.storage.request();
-      if (status == PermissionStatus.granted) {
-      } else {
-        openAppSettings();
-      }
-    } else {
-      openAppSettings();
-    }
-
     prefSound = prefs!.getString('audio-${widget.category}-${widget.namaItem}');
     if (prefSound == null) return;
     setState(() {});
   }
 
   @override
-  void dispose() {
+  void dispose() async {
     player.stop();
+    record.dispose();
     super.dispose();
   }
 }

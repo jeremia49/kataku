@@ -94,30 +94,32 @@ class _AddBTNImageState extends State<AddBTNImage> {
         child: InkWell(
           onTap: () async {
             return showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      ListTile(
-                        leading: Icon(Icons.photo),
-                        title: Text("Pilih dari Galeri"),
+              context: context,
+              builder: (context) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListTile(
+                      leading: Icon(Icons.photo),
+                      title: Text("Pilih dari Galeri"),
+                      onTap: () async {
+                        if (!context.mounted) return;
+                        await pickImage(context, ImageSource.gallery);
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    ListTile(
+                        leading: Icon(Icons.camera),
+                        title: Text("Ambil dengan Kamera"),
                         onTap: () async {
                           if (!context.mounted) return;
-                          await pickImage(context, ImageSource.gallery);
+                          await pickImage(context, ImageSource.camera);
                           Navigator.of(context).pop();
-                        },
-                      ),
-                      ListTile(
-                          leading: Icon(Icons.camera),
-                          title: Text("Ambil dengan Kamera"),
-                          onTap: () async {
-                            await pickImage(context, ImageSource.camera);
-                            Navigator.of(context).pop();
-                          }),
-                    ],
-                  );
-                });
+                        }),
+                  ],
+                );
+              },
+            );
           },
           child: Padding(
             padding: EdgeInsets.all(5.0),

@@ -287,15 +287,6 @@ class _ImageClassExtendedState extends State<ImageClassExtended> {
       type: MaterialType.transparency,
       child: Ink(
         child: InkWell(
-          // onLongPress: () async {
-          //   final String? imagePath =
-          //       await pickImage(context, ImageSource.camera);
-          //   if (imagePath == null) return;
-          //   prefs?.setString(
-          //       'user-${widget.category}-${widget.namaItem}', imagePath);
-          //   prefImage = imagePath;
-          //   setState(() {});
-          // },
           onTap: () async {
             if (prefImage == null) {
               Navigator.push(
@@ -309,7 +300,10 @@ class _ImageClassExtendedState extends State<ImageClassExtended> {
                     isFromAsset: widget.isFromAsset,
                   ),
                 ),
-              );
+              ).then((_) => setState(() {
+                    prefImage = prefs!.getString(
+                        'user-${widget.category}-${widget.namaItem}');
+                  }));
             } else {
               Navigator.push(
                 context,
@@ -322,7 +316,10 @@ class _ImageClassExtendedState extends State<ImageClassExtended> {
                     isFromAsset: false,
                   ),
                 ),
-              );
+              ).then((_) => setState(() {
+                    prefImage = prefs!.getString(
+                        'user-${widget.category}-${widget.namaItem}');
+                  }));
             }
           },
           child: Padding(

@@ -57,13 +57,32 @@ class _ImageWithEditState extends State<ImageWithEdit> {
       child: Ink(
         child: InkWell(
           onLongPress: () async {
-            final String? imagePath =
-                await pickImage(context, ImageSource.camera);
-            if (imagePath == null) return;
-            prefs?.setString(
-                'user-${widget.category}-${widget.namaItem}', imagePath);
-            prefImage = imagePath;
-            setState(() {});
+            return showModalBottomSheet(
+              context: context,
+              builder: (context) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListTile(
+                      leading: Icon(Icons.photo),
+                      title: Text("Pilih dari Galeri"),
+                      onTap: () async {
+                        if (!context.mounted) return;
+                        await pickImage(context, ImageSource.gallery);
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    ListTile(
+                        leading: Icon(Icons.camera),
+                        title: Text("Ambil dengan Kamera"),
+                        onTap: () async {
+                          await pickImage(context, ImageSource.camera);
+                          Navigator.of(context).pop();
+                        }),
+                  ],
+                );
+              },
+            );
           },
           child: Padding(
             padding: EdgeInsets.all(1.0),
@@ -91,7 +110,7 @@ class _ImageWithEditState extends State<ImageWithEdit> {
     );
   }
 
-  Future<String?> pickImage(BuildContext ctx, ImageSource imageSource) async {
+  Future<void> pickImage(BuildContext ctx, ImageSource imageSource) async {
     try {
       final XFile? image = await _picker.pickImage(source: imageSource);
       if (image == null) {
@@ -108,14 +127,18 @@ class _ImageWithEditState extends State<ImageWithEdit> {
       File imageTarget = File(
           "${appDocumentsDir.path}/${widget.category}-${uuid.v4()}${p.extension(image.path)}");
       await File(image.path).copy(imageTarget.path);
-      return imageTarget.path;
+      final String? imagePath = imageTarget.path;
+      if (imagePath == null) return;
+      prefs?.setString('user-${widget.category}-${widget.namaItem}', imagePath);
+      prefImage = imagePath;
+      setState(() {});
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Gagal menyimpan file'),
         ),
       );
-      return null;
+      return;
     }
   }
 }
