@@ -5,27 +5,27 @@ const String PERASAAN = "PERASAAN";
 List<ImageItem> PERASAANList = [
   ImageItem(
     "Senang",
-    "assets/images/perasaan/senang.jpg",
+    "assets/images/add_btn.png",
     audioSrcItem: "sounds/senang.mp3",
   ),
   ImageItem(
     "Sedih",
-    "assets/images/perasaan/sedih.jpg",
+    "assets/images/add_btn.png",
     audioSrcItem: "sounds/sedih.mp3",
   ),
   ImageItem(
     "Marah",
-    "assets/images/perasaan/marah.jpg",
+    "assets/images/add_btn.png",
     audioSrcItem: "sounds/marah.mp3",
   ),
   ImageItem(
     "Menangis",
-    "assets/images/perasaan/menangis.jpg",
+    "assets/images/add_btn.png",
     audioSrcItem: "sounds/menangis.mp3",
   ),
   ImageItem(
     "Malu",
-    "assets/images/perasaan/malu.jpg",
+    "assets/images/add_btn.png",
     audioSrcItem: "sounds/malu.mp3",
   ),
 ];

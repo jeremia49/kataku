@@ -8,12 +8,14 @@ environment:
 dependencies:
   audioplayers: ^4.0.1
   cupertino_icons: ^1.0.2
+  file_picker: ^5.3.0
   flutter:
     sdk: flutter
   get: 4.6.5
   image_picker: ^0.8.7+4
   path: ^1.8.3
   path_provider: ^2.0.14
+  permission_handler: ^10.2.0
   shared_preferences: ^2.1.0
   uuid: ^3.0.7
   video_player: ^2.6.1
@@ -39,6 +41,4 @@ flutter:
     - assets/images/sekolah/
     - assets/images/warna/
 
-    
-    
     - assets/sounds/

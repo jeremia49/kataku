@@ -242,6 +242,7 @@ class ImageClassExtended extends StatefulWidget {
   final String gambarItem;
   final String audioSrcItem;
   final bool isFromAsset;
+  final double width;
 
   const ImageClassExtended(
     this.category,
@@ -250,6 +251,7 @@ class ImageClassExtended extends StatefulWidget {
     super.key,
     this.isFromAsset = false,
     this.audioSrcItem = "",
+    this.width = 1.0,
   });
 
   @override
@@ -269,7 +271,6 @@ class _ImageClassExtendedState extends State<ImageClassExtended> {
 
   void init() async {
     prefs ??= await SharedPreferences.getInstance();
-    // prefs!.setString('user-${widget.category}', encodedMap);
     prefImage = prefs!.getString('user-${widget.category}-${widget.namaItem}');
     if (prefImage == null) return;
     setState(() {});
@@ -286,15 +287,15 @@ class _ImageClassExtendedState extends State<ImageClassExtended> {
       type: MaterialType.transparency,
       child: Ink(
         child: InkWell(
-          onLongPress: () async {
-            final String? imagePath =
-                await pickImage(context, ImageSource.camera);
-            if (imagePath == null) return;
-            prefs?.setString(
-                'user-${widget.category}-${widget.namaItem}', imagePath);
-            prefImage = imagePath;
-            setState(() {});
-          },
+          // onLongPress: () async {
+          //   final String? imagePath =
+          //       await pickImage(context, ImageSource.camera);
+          //   if (imagePath == null) return;
+          //   prefs?.setString(
+          //       'user-${widget.category}-${widget.namaItem}', imagePath);
+          //   prefImage = imagePath;
+          //   setState(() {});
+          // },
           onTap: () async {
             if (prefImage == null) {
               Navigator.push(
@@ -302,6 +303,7 @@ class _ImageClassExtendedState extends State<ImageClassExtended> {
                 MaterialPageRoute(
                   builder: (context) => ShowItemImage(
                     widget.namaItem,
+                    widget.category,
                     widget.gambarItem,
                     audioSrcItem: widget.audioSrcItem,
                     isFromAsset: widget.isFromAsset,
@@ -314,6 +316,7 @@ class _ImageClassExtendedState extends State<ImageClassExtended> {
                 MaterialPageRoute(
                   builder: (context) => ShowItemImage(
                     widget.namaItem,
+                    widget.category,
                     prefImage!,
                     audioSrcItem: widget.audioSrcItem,
                     isFromAsset: false,
@@ -329,14 +332,17 @@ class _ImageClassExtendedState extends State<ImageClassExtended> {
                 if (widget.isFromAsset) {
                   return Image.asset(
                     widget.gambarItem,
+                    width: MediaQuery.of(context).size.width * widget.width,
                   );
                 }
                 return Image.file(
                   File(widget.gambarItem),
+                  width: MediaQuery.of(context).size.width * widget.width,
                 );
               }
               return Image.file(
                 File(prefImage!),
+                width: MediaQuery.of(context).size.width * widget.width,
               );
             }(),
           ),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kataku/app/components/add_btn.dart';
+import 'package:kataku/app/components/item_builder.dart';
 import 'package:kataku/app/components/remember_input.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -100,7 +101,13 @@ class KeluargaMember extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.all(8),
-          child: AddBTNImage(nama.toLowerCase()),
+          child: ImageClassExtended(
+            "KELUARGA",
+            nama,
+            "assets/images/add_btn.png",
+            isFromAsset: true,
+            width: 0.3,
+          ),
         ),
         Expanded(
           child: Padding(
