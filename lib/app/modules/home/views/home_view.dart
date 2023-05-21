@@ -55,9 +55,9 @@ class HomeView extends GetView<HomeController> {
                   const Color.fromARGB(255, 139, 87, 42),
                 ),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
+                  const RoundedRectangleBorder(
                     borderRadius: BorderRadius.zero,
-                    side: const BorderSide(
+                    side: BorderSide(
                       color: Color.fromARGB(255, 139, 87, 42),
                     ),
                   ),
@@ -66,9 +66,9 @@ class HomeView extends GetView<HomeController> {
               onPressed: () {
                 Get.toNamed('/panduan');
               },
-              child: Padding(
+              child: const Padding(
                 padding: EdgeInsets.all(5),
-                child: const Text(
+                child: Text(
                   "Panduan",
                   style: TextStyle(
                       fontSize: 20,

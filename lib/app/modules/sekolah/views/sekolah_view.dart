@@ -19,13 +19,13 @@ class SekolahView extends GetView<SekolahController> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Image.asset(
                     "assets/images/btn_sekolah.jpg",
                     width: MediaQuery.of(context).size.width * 0.35,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Expanded(
@@ -47,7 +47,7 @@ class SekolahView extends GetView<SekolahController> {
           ),
         ],
       ),
-      backgroundColor: Color.fromARGB(255, 255, 246, 129),
+      backgroundColor: const Color.fromARGB(255, 255, 246, 129),
     );
   }
 }

@@ -64,8 +64,8 @@ class _ImageWithEditState extends State<ImageWithEdit> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     ListTile(
-                      leading: Icon(Icons.photo),
-                      title: Text("Pilih dari Galeri"),
+                      leading: const Icon(Icons.photo),
+                      title: const Text("Pilih dari Galeri"),
                       onTap: () async {
                         if (!context.mounted) return;
                         await pickImage(context, ImageSource.gallery);
@@ -73,8 +73,8 @@ class _ImageWithEditState extends State<ImageWithEdit> {
                       },
                     ),
                     ListTile(
-                        leading: Icon(Icons.camera),
-                        title: Text("Ambil dengan Kamera"),
+                        leading: const Icon(Icons.camera),
+                        title: const Text("Ambil dengan Kamera"),
                         onTap: () async {
                           await pickImage(context, ImageSource.camera);
                           Navigator.of(context).pop();
@@ -85,7 +85,7 @@ class _ImageWithEditState extends State<ImageWithEdit> {
             );
           },
           child: Padding(
-            padding: EdgeInsets.all(1.0),
+            padding: const EdgeInsets.all(1.0),
             child: () {
               if (prefImage == null) {
                 if (widget.isFromAsset) {
@@ -119,15 +119,15 @@ class _ImageWithEditState extends State<ImageWithEdit> {
             content: Text('Gagal menerima file'),
           ),
         );
-        return null;
+        return;
       }
-      var uuid = Uuid();
+      var uuid = const Uuid();
       final Directory appDocumentsDir =
           await getApplicationDocumentsDirectory();
       File imageTarget = File(
           "${appDocumentsDir.path}/${widget.category}-${uuid.v4()}${p.extension(image.path)}");
       await File(image.path).copy(imageTarget.path);
-      final String? imagePath = imageTarget.path;
+      final String imagePath = imageTarget.path;
       if (imagePath == null) return;
       prefs?.setString('user-${widget.category}-${widget.namaItem}', imagePath);
       prefImage = imagePath;

@@ -10,7 +10,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
-import 'package:path/path.dart' as p;
 import 'package:record/record.dart';
 
 class ShowItemImage extends StatefulWidget {
@@ -70,7 +69,7 @@ class _ShowItemImageState extends State<ShowItemImage> {
           Image.asset("assets/images/bg_base.jpg"),
           SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 top: 50,
               ),
               child: Column(
@@ -85,14 +84,14 @@ class _ShowItemImageState extends State<ShowItemImage> {
                       width: 0.7,
                     );
                   }(),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                   ),
                   secondText(
                     category: widget.category,
                     namaItem: widget.namaItem,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                   ),
                   AudioPlayer(
@@ -117,7 +116,7 @@ class _ShowItemImageState extends State<ShowItemImage> {
           ),
         ],
       ),
-      backgroundColor: Color.fromARGB(255, 255, 246, 129),
+      backgroundColor: const Color.fromARGB(255, 255, 246, 129),
     );
   }
 }
@@ -231,7 +230,7 @@ class _secondTextState extends State<secondText> {
             }
             return widget.namaItem;
           }(),
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 50,
           ),
           textAlign: TextAlign.center,
@@ -264,7 +263,7 @@ class _AudioPlayerState extends State<AudioPlayer> {
   Future<void> pickAudio(BuildContext context, {bool isRecord = false}) async {
     if (isRecord) {
       if (await record.hasPermission()) {
-        var uuid = Uuid();
+        var uuid = const Uuid();
         final Directory appDocumentsDir =
             await getApplicationDocumentsDirectory();
         File audioTarget =
@@ -297,7 +296,7 @@ class _AudioPlayerState extends State<AudioPlayer> {
       if (result != null) {
         PlatformFile file = result.files.first;
         try {
-          var uuid = Uuid();
+          var uuid = const Uuid();
           final Directory appDocumentsDir =
               await getApplicationDocumentsDirectory();
           File audioTarget = File(
@@ -345,8 +344,8 @@ class _AudioPlayerState extends State<AudioPlayer> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 ListTile(
-                  leading: Icon(Icons.music_note),
-                  title: Text("Pilih dari File"),
+                  leading: const Icon(Icons.music_note),
+                  title: const Text("Pilih dari File"),
                   onTap: () async {
                     if (!context.mounted) return;
                     await pickAudio(context, isRecord: false);
@@ -354,8 +353,8 @@ class _AudioPlayerState extends State<AudioPlayer> {
                   },
                 ),
                 ListTile(
-                    leading: Icon(Icons.mic),
-                    title: Text("Rekam Suara"),
+                    leading: const Icon(Icons.mic),
+                    title: const Text("Rekam Suara"),
                     onTap: () async {
                       if (!context.mounted) return;
                       await pickAudio(context, isRecord: true);

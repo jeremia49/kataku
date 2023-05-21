@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class RememberTextField extends StatefulWidget {
   final String namaLabel;
-  RememberTextField(
+  const RememberTextField(
     this.namaLabel, {
     super.key,
   });
@@ -47,9 +47,9 @@ class _RememberTextFieldState extends State<RememberTextField> {
     return TextField(
       controller: controller,
       decoration: InputDecoration(
-        fillColor: Color.fromARGB(50, 145, 140, 140),
+        fillColor: const Color.fromARGB(50, 145, 140, 140),
         filled: true,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         hintText: widget.namaLabel,
       ),
     );

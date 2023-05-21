@@ -8,6 +8,7 @@ import '../controllers/pakaian_controller.dart';
 
 class PakaianView extends GetView<PakaianController> {
   const PakaianView({Key? key}) : super(key: key);
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -18,13 +19,13 @@ class PakaianView extends GetView<PakaianController> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Image.asset(
                     "assets/images/btn_pakaian.jpg",
                     width: MediaQuery.of(context).size.width * 0.35,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Expanded(
@@ -46,7 +47,7 @@ class PakaianView extends GetView<PakaianController> {
           ),
         ],
       ),
-      backgroundColor: Color.fromARGB(255, 255, 246, 129),
+      backgroundColor: const Color.fromARGB(255, 255, 246, 129),
     );
   }
 }

@@ -24,13 +24,13 @@ class _showCategoryState extends State<showCategory> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Image.file(
                     File(widget.categoryImage),
                     width: MediaQuery.of(context).size.width * 0.35,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Expanded(
@@ -53,7 +53,7 @@ class _showCategoryState extends State<showCategory> {
           ),
         ],
       ),
-      backgroundColor: Color.fromARGB(255, 255, 246, 129),
+      backgroundColor: const Color.fromARGB(255, 255, 246, 129),
     );
   }
 }

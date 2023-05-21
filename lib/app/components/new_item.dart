@@ -105,7 +105,7 @@ class _AddNewItemButtonState extends State<AddNewItemButton> {
             widget.onSuccess();
           },
           child: Padding(
-            padding: EdgeInsets.all(1.0),
+            padding: const EdgeInsets.all(1.0),
             child: Image.asset(
               "assets/images/add_btn.png",
               width: MediaQuery.of(context).size.width * widget.scale,
@@ -133,7 +133,7 @@ class _AddNewItemButtonState extends State<AddNewItemButton> {
         );
         return null;
       }
-      var uuid = Uuid();
+      var uuid = const Uuid();
       final Directory appDocumentsDir =
           await getApplicationDocumentsDirectory();
       File imageTarget = File(

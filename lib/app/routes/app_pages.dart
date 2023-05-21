@@ -48,7 +48,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.MAINMENU,
-      page: () => MainmenuView(),
+      page: () => const MainmenuView(),
       binding: MainmenuBinding(),
     ),
     GetPage(

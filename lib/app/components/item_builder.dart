@@ -46,7 +46,6 @@ class _ImageButtonItemBuilderState extends State<ImageButtonItemBuilder> {
     }
     setState(() {});
     // userAdd = json.decode(useradd) as List<Map<String, String>>;
-    print(userAdd);
     // userAdd
   }
 
@@ -183,7 +182,7 @@ class _AddImageButtonState extends State<AddImageButton> {
             widget.onSuccess();
           },
           child: Padding(
-            padding: EdgeInsets.all(1.0),
+            padding: const EdgeInsets.all(1.0),
             child: Image.asset("assets/images/add_btn.png"),
           ),
         ),
@@ -208,7 +207,7 @@ class _AddImageButtonState extends State<AddImageButton> {
         );
         return null;
       }
-      var uuid = Uuid();
+      var uuid = const Uuid();
       final Directory appDocumentsDir =
           await getApplicationDocumentsDirectory();
       File imageTarget = File(
@@ -323,7 +322,7 @@ class _ImageClassExtendedState extends State<ImageClassExtended> {
             }
           },
           child: Padding(
-            padding: EdgeInsets.all(1.0),
+            padding: const EdgeInsets.all(1.0),
             child: () {
               if (prefImage == null) {
                 if (widget.isFromAsset) {
@@ -359,7 +358,7 @@ class _ImageClassExtendedState extends State<ImageClassExtended> {
         );
         return null;
       }
-      var uuid = Uuid();
+      var uuid = const Uuid();
       final Directory appDocumentsDir =
           await getApplicationDocumentsDirectory();
       File imageTarget = File(

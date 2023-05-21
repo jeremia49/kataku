@@ -10,7 +10,7 @@ import 'package:path/path.dart' as p;
 class AddBTNImage extends StatefulWidget {
   final String itemName;
 
-  AddBTNImage(
+  const AddBTNImage(
     this.itemName, {
     super.key,
   });
@@ -60,7 +60,7 @@ class _AddBTNImageState extends State<AddBTNImage> {
         );
         return;
       }
-      var uuid = Uuid();
+      var uuid = const Uuid();
       final Directory appDocumentsDir =
           await getApplicationDocumentsDirectory();
       File imageTarget = File(
@@ -86,7 +86,7 @@ class _AddBTNImageState extends State<AddBTNImage> {
       child: Ink(
         decoration: BoxDecoration(
           border: Border.all(
-            color: Color.fromARGB(255, 225, 219, 137),
+            color: const Color.fromARGB(255, 225, 219, 137),
             width: 4.0,
           ),
           shape: BoxShape.rectangle,
@@ -100,8 +100,8 @@ class _AddBTNImageState extends State<AddBTNImage> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     ListTile(
-                      leading: Icon(Icons.photo),
-                      title: Text("Pilih dari Galeri"),
+                      leading: const Icon(Icons.photo),
+                      title: const Text("Pilih dari Galeri"),
                       onTap: () async {
                         if (!context.mounted) return;
                         await pickImage(context, ImageSource.gallery);
@@ -109,8 +109,8 @@ class _AddBTNImageState extends State<AddBTNImage> {
                       },
                     ),
                     ListTile(
-                        leading: Icon(Icons.camera),
-                        title: Text("Ambil dengan Kamera"),
+                        leading: const Icon(Icons.camera),
+                        title: const Text("Ambil dengan Kamera"),
                         onTap: () async {
                           if (!context.mounted) return;
                           await pickImage(context, ImageSource.camera);
@@ -122,7 +122,7 @@ class _AddBTNImageState extends State<AddBTNImage> {
             );
           },
           child: Padding(
-            padding: EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(5.0),
             child: targetImage != null
                 ? Image.file(
                     targetImage!,

@@ -19,13 +19,13 @@ class AngkaView extends GetView<AngkaController> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Image.asset(
                     "assets/images/btn_angka.jpg",
                     width: MediaQuery.of(context).size.width * 0.35,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Expanded(
@@ -50,7 +50,7 @@ class AngkaView extends GetView<AngkaController> {
           ),
         ],
       ),
-      backgroundColor: Color.fromARGB(255, 255, 246, 129),
+      backgroundColor: const Color.fromARGB(255, 255, 246, 129),
     );
   }
 }

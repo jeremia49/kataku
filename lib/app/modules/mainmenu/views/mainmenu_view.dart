@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:kataku/app/components/new_category.dart';
 import 'package:kataku/app/components/remember_input.dart';
 import 'package:kataku/app/components/show_category.dart';
@@ -15,7 +14,7 @@ import '../../../components/add_btn.dart';
 import '../controllers/mainmenu_controller.dart';
 
 class MainmenuView extends GetView<MainmenuController> {
-  MainmenuView({Key? key}) : super(key: key);
+  const MainmenuView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,18 +28,18 @@ class MainmenuView extends GetView<MainmenuController> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
-                AddBTNImage("myimage"),
-                SizedBox(
+                const AddBTNImage("myimage"),
+                const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  child: RememberTextField("Nama"),
-                ),
                 SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: const RememberTextField("Nama"),
+                ),
+                const SizedBox(
                   height: 20,
                 ),
                 MainMenuListWidget(mainMenuList),
@@ -60,7 +59,7 @@ class MainmenuView extends GetView<MainmenuController> {
           ),
         ],
       ),
-      backgroundColor: Color.fromARGB(255, 255, 246, 129),
+      backgroundColor: const Color.fromARGB(255, 255, 246, 129),
     );
   }
 }
@@ -105,10 +104,10 @@ class _MainMenuListWidgetState extends State<MainMenuListWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: GridView.builder(
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 10,
@@ -121,7 +120,7 @@ class _MainMenuListWidgetState extends State<MainMenuListWidget> {
                 Get.toNamed(widget.originalItem[index].hyperlink);
               },
               child: Padding(
-                padding: EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Image.asset(
                   widget.originalItem[index].imgpath,
                   width: MediaQuery.of(context).size.width * 0.25,
@@ -145,7 +144,7 @@ class _MainMenuListWidgetState extends State<MainMenuListWidget> {
                 // Data gambar : userAdd[index - widget.originalItem.length].values.first
               },
               child: Padding(
-                padding: EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Image.file(
                   File(
                       userAdd[index - widget.originalItem.length].values.first),

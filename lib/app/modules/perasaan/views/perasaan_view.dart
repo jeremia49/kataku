@@ -34,7 +34,7 @@ class PerasaanView extends GetView<PerasaanController> {
           ],
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 255, 246, 129),
+      backgroundColor: const Color.fromARGB(255, 255, 246, 129),
     );
   }
 }
@@ -54,52 +54,52 @@ class _perasaanWidgetState extends State<perasaanWidget> {
       () => Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
           Image.asset(
             "assets/images/btn_perasaan.jpg",
             width: MediaQuery.of(context).size.width * 0.35,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          KeluargaMember(
+          const KeluargaMember(
             "Senang",
             audioSrc: "sounds/senang.mp3",
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
-          KeluargaMember(
+          const KeluargaMember(
             "Sedih",
             audioSrc: "sounds/sedih.mp3",
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
-          KeluargaMember(
+          const KeluargaMember(
             "Marah",
             audioSrc: "sounds/marah.mp3",
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
-          KeluargaMember(
+          const KeluargaMember(
             "Menangis",
             audioSrc: "sounds/menangis.mp3",
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
-          KeluargaMember(
+          const KeluargaMember(
             "Malu",
             audioSrc: "sounds/malu.mp3",
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           ...() {
@@ -122,7 +122,7 @@ class _perasaanWidgetState extends State<perasaanWidget> {
             },
             scale: 0.3,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
         ],
@@ -148,7 +148,7 @@ class KeluargaMember extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Padding(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: ImageClassExtended(
             "PERASAAAN",
             nama,
@@ -160,7 +160,7 @@ class KeluargaMember extends StatelessWidget {
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.only(left: 10, right: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: RememberTextField(nama),
           ),
         ),

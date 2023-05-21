@@ -102,7 +102,7 @@ class _AddCategoryButtonState extends State<AddCategoryButton> {
             widget.onSuccess();
           },
           child: Padding(
-            padding: EdgeInsets.all(1.0),
+            padding: const EdgeInsets.all(1.0),
             child: Image.asset("assets/images/add_btn.png"),
           ),
         ),
@@ -127,7 +127,7 @@ class _AddCategoryButtonState extends State<AddCategoryButton> {
         );
         return null;
       }
-      var uuid = Uuid();
+      var uuid = const Uuid();
       final Directory appDocumentsDir =
           await getApplicationDocumentsDirectory();
       File imageTarget = File(

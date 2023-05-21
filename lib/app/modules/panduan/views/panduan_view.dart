@@ -14,7 +14,7 @@ class PanduanView extends GetView<PanduanController> {
   const PanduanView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return pdf();
+    return const pdf();
   }
 }
 
@@ -77,9 +77,9 @@ class _pdfState extends State<pdf> {
                 pageSnap: true,
                 defaultPage: currentPage!,
                 fitPolicy: FitPolicy.BOTH,
-                onRender: (_pages) {
+                onRender: (pages) {
                   setState(() {
-                    pages = _pages;
+                    pages = pages;
                     isReady = true;
                   });
                 },

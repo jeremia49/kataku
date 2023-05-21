@@ -1,14 +1,10 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:kataku/app/components/add_btn.dart';
 import 'package:kataku/app/components/item_builder.dart';
 import 'package:kataku/app/components/new_item.dart';
 import 'package:kataku/app/components/remember_input.dart';
-import 'package:path_provider/path_provider.dart';
 
 import '../controllers/keluarga_controller.dart';
 
@@ -39,7 +35,7 @@ class KeluargaView extends GetView<KeluargaController> {
           ],
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 255, 246, 129),
+      backgroundColor: const Color.fromARGB(255, 255, 246, 129),
     );
   }
 }
@@ -59,50 +55,50 @@ class _keluargaWidgetState extends State<keluargaWidget> {
       () => Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
           Image.asset(
             "assets/images/btn_keluarga.jpg",
             width: MediaQuery.of(context).size.width * 0.35,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          KeluargaMember("Ayah"),
-          SizedBox(
+          const KeluargaMember("Ayah"),
+          const SizedBox(
             height: 5,
           ),
-          KeluargaMember("Ibu"),
-          SizedBox(
+          const KeluargaMember("Ibu"),
+          const SizedBox(
             height: 5,
           ),
-          KeluargaMember("Kakek"),
-          SizedBox(
+          const KeluargaMember("Kakek"),
+          const SizedBox(
             height: 5,
           ),
-          KeluargaMember("Nenek"),
-          SizedBox(
+          const KeluargaMember("Nenek"),
+          const SizedBox(
             height: 5,
           ),
-          KeluargaMember("Paman"),
-          SizedBox(
+          const KeluargaMember("Paman"),
+          const SizedBox(
             height: 5,
           ),
-          KeluargaMember("Bibi"),
-          SizedBox(
+          const KeluargaMember("Bibi"),
+          const SizedBox(
             height: 5,
           ),
-          KeluargaMember("Tante"),
-          SizedBox(
+          const KeluargaMember("Tante"),
+          const SizedBox(
             height: 5,
           ),
-          KeluargaMember("Saudara Laki Laki"),
-          SizedBox(
+          const KeluargaMember("Saudara Laki Laki"),
+          const SizedBox(
             height: 5,
           ),
-          KeluargaMember("Saudara Perempuan"),
-          SizedBox(
+          const KeluargaMember("Saudara Perempuan"),
+          const SizedBox(
             height: 5,
           ),
           ...() {
@@ -125,7 +121,7 @@ class _keluargaWidgetState extends State<keluargaWidget> {
             },
             scale: 0.3,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
         ],
@@ -149,7 +145,7 @@ class KeluargaMember extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Padding(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: ImageClassExtended(
             "KELUARGA",
             nama,
@@ -160,7 +156,7 @@ class KeluargaMember extends StatelessWidget {
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.only(left: 10, right: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: RememberTextField(nama),
           ),
         ),
