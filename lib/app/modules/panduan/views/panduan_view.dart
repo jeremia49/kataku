@@ -64,10 +64,6 @@ class _pdfState extends State<pdf> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Panduan"),
-      ),
-      backgroundColor: Colors.red,
       body: Stack(
         children: <Widget>[
           () {
@@ -113,10 +109,19 @@ class _pdfState extends State<pdf> {
                 },
               );
             }
-            return SizedBox(
-              height: 10,
-            );
+            return Container();
           }(),
+          Positioned(
+            left: 10,
+            top: 10,
+            child: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Image.asset("assets/images/home_btn.png"),
+              iconSize: 50,
+            ),
+          ),
         ],
       ),
     );

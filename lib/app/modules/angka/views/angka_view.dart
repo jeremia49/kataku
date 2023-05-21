@@ -32,7 +32,6 @@ class AngkaView extends GetView<AngkaController> {
                   child: ImageButtonItemBuilder(
                     ANGKA,
                     ANGKAList,
-                    withoutAdd: true,
                   ),
                 ),
               ],
