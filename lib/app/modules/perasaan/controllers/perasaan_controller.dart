@@ -1,23 +1,30 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PerasaanController extends GetxController {
-  //TODO: Implement PerasaanController
+  SharedPreferences? prefs;
+  var userAdd = List.empty(
+    growable: true,
+  ).obs;
 
-  final count = 0.obs;
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    await init();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  Future<void> init() async {
+    prefs ??= await SharedPreferences.getInstance();
+    // prefs!.setString('user-${widget.category}', encodedMap);
+    final String? useradd = prefs!.getString('user-PERASAAN');
+    if (useradd == null) return;
 
-  @override
-  void onClose() {
-    super.onClose();
+    final List<dynamic> listUserAdd = json.decode(useradd);
+    for (var el in listUserAdd) {
+      Map<String, String> map = el.cast<String, String>();
+      userAdd.add(map);
+    }
   }
-
-  void increment() => count.value++;
 }

@@ -89,12 +89,17 @@ class _ShowItemImageState extends State<ShowItemImage> {
                     height: 40,
                   ),
                   secondText(
-                      category: widget.category, namaItem: widget.namaItem),
+                    category: widget.category,
+                    namaItem: widget.namaItem,
+                  ),
                   SizedBox(
                     height: 40,
                   ),
                   AudioPlayer(
-                      widget.category, widget.namaItem, widget.audioSrcItem),
+                    widget.category,
+                    widget.namaItem,
+                    widget.audioSrcItem,
+                  ),
                 ],
               ),
             ),
@@ -229,6 +234,8 @@ class _secondTextState extends State<secondText> {
           style: TextStyle(
             fontSize: 50,
           ),
+          textAlign: TextAlign.center,
+          softWrap: true,
         ),
       ),
     );

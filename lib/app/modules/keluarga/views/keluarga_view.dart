@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kataku/app/components/add_btn.dart';
 import 'package:kataku/app/components/item_builder.dart';
+import 'package:kataku/app/components/new_item.dart';
 import 'package:kataku/app/components/remember_input.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -22,54 +23,7 @@ class KeluargaView extends GetView<KeluargaController> {
           children: [
             Image.asset("assets/images/bg_base.jpg"),
             SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Image.asset(
-                    "assets/images/btn_keluarga.jpg",
-                    width: MediaQuery.of(context).size.width * 0.35,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  KeluargaMember("Ayah"),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  KeluargaMember("Ibu"),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  KeluargaMember("Kakek"),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  KeluargaMember("Nenek"),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  KeluargaMember("Paman"),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  KeluargaMember("Bibi"),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  KeluargaMember("Tante"),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  KeluargaMember("Saudara Laki Laki"),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  KeluargaMember("Saudara Perempuan"),
-                ],
-              ),
+              child: keluargaWidget(controller),
             ),
             Positioned(
               left: 10,
@@ -90,9 +44,104 @@ class KeluargaView extends GetView<KeluargaController> {
   }
 }
 
+class keluargaWidget extends StatefulWidget {
+  final dynamic controller;
+  const keluargaWidget(this.controller, {super.key});
+
+  @override
+  State<keluargaWidget> createState() => _keluargaWidgetState();
+}
+
+class _keluargaWidgetState extends State<keluargaWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 40,
+          ),
+          Image.asset(
+            "assets/images/btn_keluarga.jpg",
+            width: MediaQuery.of(context).size.width * 0.35,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          KeluargaMember("Ayah"),
+          SizedBox(
+            height: 5,
+          ),
+          KeluargaMember("Ibu"),
+          SizedBox(
+            height: 5,
+          ),
+          KeluargaMember("Kakek"),
+          SizedBox(
+            height: 5,
+          ),
+          KeluargaMember("Nenek"),
+          SizedBox(
+            height: 5,
+          ),
+          KeluargaMember("Paman"),
+          SizedBox(
+            height: 5,
+          ),
+          KeluargaMember("Bibi"),
+          SizedBox(
+            height: 5,
+          ),
+          KeluargaMember("Tante"),
+          SizedBox(
+            height: 5,
+          ),
+          KeluargaMember("Saudara Laki Laki"),
+          SizedBox(
+            height: 5,
+          ),
+          KeluargaMember("Saudara Perempuan"),
+          SizedBox(
+            height: 5,
+          ),
+          ...() {
+            List<Widget> a = List.empty(growable: true);
+            for (var member in widget.controller.userAdd) {
+              a.add(KeluargaMember(
+                member.keys.first,
+                pathGambar: member.values.first,
+                isFromAsset: false,
+              ));
+              a.add(const SizedBox(height: 5));
+            }
+            return a;
+          }(),
+          AddNewItemButton(
+            'KELUARGA',
+            widget.controller.userAdd,
+            () {
+              setState(() {});
+            },
+            scale: 0.3,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class KeluargaMember extends StatelessWidget {
   final String nama;
-  const KeluargaMember(this.nama, {super.key});
+  final String pathGambar;
+  final bool isFromAsset;
+  const KeluargaMember(this.nama,
+      {this.pathGambar = "assets/images/add_btn.png",
+      this.isFromAsset = true,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -104,8 +153,8 @@ class KeluargaMember extends StatelessWidget {
           child: ImageClassExtended(
             "KELUARGA",
             nama,
-            "assets/images/add_btn.png",
-            isFromAsset: true,
+            pathGambar,
+            isFromAsset: isFromAsset,
             width: 0.3,
           ),
         ),
